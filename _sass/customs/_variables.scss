@@ -1,0 +1,56 @@
+/* Overwrite the Minimal Mistakes theme variables */
+
+
+/* Fonts */
+
+$sans-serif: "Pretendard Variable", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
+$serif: "Maru Buri", "Noto Serif KR", Georgia, Times, serif;
+$monospace: "Nanum Gothic Coding", "Noto Sans Mono", Monaco, Consolas, "Lucida Console", monospace;
+
+/* Fonts size */
+$font-size-1: 0.5rem;
+$font-size-2: 0.75rem;
+$font-size-3: 0.875rem;
+$font-size-4: 1.0rem;
+$font-size-5: 1.125rem;
+$font-size-6: 1.25rem;
+$font-size-7: 1.5rem;
+$font-size-8: 1.75rem;
+$font-size-9: 2.0rem;
+
+
+/* Color Schema */
+
+$red: #e8282b;  // RGB (232, 40, 43)
+$orange: #f0852d;  // RGB (240, 133, 45)
+$yellow: #ecd803;  // RGB (236, 216, 3)
+$light_green: #3eb489;  // RGB (62, 180, 137)
+$green: #10771a;  // RGB (16, 119, 26)
+$light_blue: #4e9fe5;  // RGB (78, 159, 229)
+$blue: #1643a2;  // RGB (22, 67, 162)
+$purple: #562270;  // RGB (86, 34, 112)
+
+$black: #0a0b0b;  // RGB (10, 11, 11)
+$darker_gray: #202020;  // RGB (32, 32, 32)
+$dark_gray: #404040;  // RGB (64, 64, 64)
+$gray: #808080;  // RGB (128, 128, 128)
+$light_gray: #c0c0c0;  // RGB (192, 192, 192)
+$lighter_gray: #e0e0e0;  // RGB (224, 224, 224)
+$white: #fcfcff;  // RGB (252, 252, 255)
+
+$background-color: $white;
+$code-background-color: $white;
+$code-background-color-dark: $light-gray;
+$text-color: $black;
+$muted-text-color: $gray;
+$border-color: $lighter-gray;
+$form-background-color: $lighter-gray;
+$footer-background-color: $lighter-gray;
+
+$primary-color: $blue;
+$success-color: $green;
+$warning-color: $orange;
+$danger-color: $red;
+$info-color: $light_blue;
+$focus-color: $primary-color;
+$active-color: mix($white, $primary-color, 80%);
