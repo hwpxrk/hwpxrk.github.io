@@ -1,0 +1,71 @@
+/* Animations */
+
+@-webkit-keyframes swipe {
+    from {
+        opacity: 0;
+        transform: translateX(-0.5rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes swipe {
+    from {
+        opacity: 0;
+        transform: translateX(-0.5rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@-webkit-keyframes slide {
+    from {
+        opacity: 0;
+        transform: translateY(-0.5rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide {
+    from {
+        opacity: 0;
+        transform: translateY(-0.5rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .header {
+        animation: none !important;
+        transition: none !important;
+
+        * {
+            animation: none !important;
+            transition: none !important;
+
+            &::before {
+                animation: none !important;
+                transition: none !important;
+            }
+
+            &::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    }
+}

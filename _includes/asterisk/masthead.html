@@ -1,0 +1,80 @@
+<header class="header">
+    <nav class="masthead" aria-label="메인 메뉴">
+        <div class="container">
+            <div class="signature">
+                <a class="link" href="{{ '/' | relative_url }}">
+                    <img class="logo" src="{{ site.logo | relative_url }}" alt="{{ site.title | escape_once | strip }}">
+                    <span class="title">
+                        {{ site.title | escape_once | strip }}
+                        <span class="subtitle">{{ site.subtitle | escape_once | strip }}</span>
+                    </span>
+                </a>
+            </div>
+
+            <div class="menu" id="menu">
+                <ul class="menu_list">
+                    {% for menu in site.data.navigation.main %}
+                        <li class="menu_item">
+                            {% if menu.url %}
+                                <a class="categories" href="{{ menu.url | relative_url }}">
+                                    <span class="category">{{ menu.title | escape_once }}</span>
+                                </a>
+                            {% elsif menu.children and menu.children.size > 0 %}
+                                <button class="categories" type="button" aria-controls="submenu{{ forloop.index0 }}" aria-expanded="false">
+                                        <span class="category">{{ menu.title | escape_once }}</span>
+                                </button>
+                            {% endif %}
+
+                            {% if menu.children and menu.children.size > 0 %}
+                                <button class="trigger" type="button" aria-label="{{ menu.title | escape_once }} 메뉴 열기" aria-controls="submenu{{ forloop.index0 }}" aria-expanded="false">
+                                    <i class="fas fa-chevron-down chevron" aria-hidden="true"></i>
+                                </button>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            {% if site.search %}
+                <div class="search">
+                    <button class="search_button search__toggle" type="button" aria-label="검색 열기">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                    </button>
+                </div>
+            {% endif %}
+
+            <div class="hamburger">
+                <button class="hamburger_button" type="button" aria-controls="menu{% for menu in site.data.navigation.main %}{% if menu.children %} submenu{{ forloop.index0 }}{% endif %}{% endfor %}" aria-expanded="false" aria-label="메인 메뉴">
+                    <i class="line ceiling" aria-hidden="true"></i>
+                    <i class="line floor" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            <div class="backward">
+                <button class="backward_button" type="button" aria-label="메인 메뉴로 돌아가기" hidden>
+                    <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="background" hidden></div>
+
+        {% for menu in site.data.navigation.main %}
+            {% if menu.children and menu.children.size > 0 %}
+                <div class="submenu" id="submenu{{ forloop.index0 }}" data-index="{{ forloop.index0 }}" hidden>
+                    <span class="label" id="label{{ forloop.index0 }}">{{ menu.title | escape_once }}</span>
+
+                    <ul class="submenu_list" aria-labelledby="label{{ forloop.index0 }}">
+                        {% for submenu in menu.children %}
+                            <li class="submenu_item">
+                                <a class="submenu_category" href="{{ submenu.url | relative_url }}">{{ submenu.title | escape_once }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </nav>
+
+    <div class="filter" hidden></div>
+</header>
