@@ -104,8 +104,8 @@ social:
     name:
     links:
         - 'https://instagram.com/hwpxrk_'
-        - 'https://instagram.com/_igotcrushonyou'
         - 'https://instagram.com/s_s_kong_03'
+        - 'https://instagram.com/_igotcrushonyou'
 
 # Analytics
 analytics:
@@ -125,10 +125,10 @@ author:
           url: 'https://instagram.com/hwpxrk_'
         - label: '산업인공지능전공 부후보'
           icon: 'fab fa-fw fa-instagram'
-          url: 'https://instagram.com/hwpxrk_'
+          url: 'https://instagram.com/s_s_kong_03'
         - label: 'AI융합운영전공 부후보'
           icon: 'fab fa-fw fa-instagram'
-          url: 'https://instagram.com/hwpxrk_'
+          url: 'https://instagram.com/_igotcrushonyou'
 
 # Site Footer
 footer:
@@ -138,10 +138,10 @@ footer:
           url: 'https://instagram.com/hwpxrk_'
         - label: '산업인공지능전공 부후보'
           icon: 'fab fa-fw fa-instagram'
-          url: 'https://instagram.com/hwpxrk_'
+          url: 'https://instagram.com/s_s_kong_03'
         - label: 'AI융합운영전공 부후보'
           icon: 'fab fa-fw fa-instagram'
-          url: 'https://instagram.com/hwpxrk_'
+          url: 'https://instagram.com/_igotcrushonyou'
     since: '2026'
 
 # Reading Files
