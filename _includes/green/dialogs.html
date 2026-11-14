@@ -1,0 +1,23 @@
+<dialog class="green-dialog green-search-dialog" id="green-search" aria-labelledby="green-search-title">
+    <div class="green-dialog-header"><a class="green-dialog-brand" href="{{ '/' | relative_url }}">초록.</a><button class="green-icon-button" type="button" data-dialog-close aria-label="검색 닫기">{% include green/icon.html name='close' %}</button></div>
+    <div class="green-search-inner">
+        <p class="green-eyebrow">FIND YOUR GREEN</p>
+        <h2 id="green-search-title">어떤 이야기가 궁금한가요?</h2>
+        <form class="green-search-form" data-search-form role="search">
+            <label class="green-sr-only" for="green-search-input">키워드 검색</label>
+            <input id="green-search-input" type="search" name="q" placeholder="키워드로 검색해보세요" autocomplete="off" data-search-input>
+            <button class="green-icon-button green-search-clear" type="button" data-search-clear aria-label="검색어 지우기" hidden>{% include green/icon.html name='close' %}</button>
+            <button class="green-icon-button" type="submit" aria-label="검색">{% include green/icon.html name='search' %}</button>
+        </form>
+        <div class="green-keywords"><span>추천 키워드</span>{% for item in site.data.green.items %}<button type="button" data-search-keyword="{{ item.title }}">{{ item.title }}</button>{% endfor %}</div>
+        <p class="green-search-status" data-search-status role="status" aria-live="polite">궁금한 초록의 이야기를 검색해보세요.</p>
+        <ul class="green-search-results" data-search-results></ul>
+        <p class="green-search-empty" data-search-empty hidden>검색 결과가 없습니다. 다른 키워드로 찾아보세요.</p>
+    </div>
+</dialog>
+<dialog class="green-dialog green-menu-dialog" id="green-menu" aria-labelledby="green-menu-title">
+    <div class="green-dialog-header"><a class="green-dialog-brand" href="{{ '/' | relative_url }}">초록.</a><button class="green-icon-button" type="button" data-dialog-close aria-label="메뉴 닫기">{% include green/icon.html name='close' %}</button></div>
+    <h2 id="green-menu-title" class="green-sr-only">전체 메뉴</h2>
+    <nav class="green-menu-links" aria-label="전체 메뉴">{% for link in site.data.navigation.main %}<a href="{{ link.url | relative_url }}"><span>{{ link.title }}</span>{% include green/icon.html name='diagonal' %}</a>{% endfor %}</nav>
+    <p class="green-menu-caption">당신의 모든 계절이<br>초록으로 기억되기를.</p>
+</dialog>

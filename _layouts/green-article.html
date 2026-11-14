@@ -1,0 +1,71 @@
+---
+layout: green
+---
+{% assign article_item = site.data.green.items | where: 'key', page.green_key | first %}
+{% assign article_body = content | strip %}
+<article class="green-article">
+    <nav class="green-breadcrumb" aria-label="현재 위치">
+        <a href="{{ '/' | relative_url }}">홈</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{{ page.title | escape }}</span>
+    </nav>
+
+    <header class="green-article-header">
+        <p class="green-eyebrow">{{ article_item.kicker | escape }}</p>
+        <h1>{{ page.title | escape }}</h1>
+        <p>{{ page.description | escape }}</p>
+    </header>
+
+    <div class="green-article-art" aria-hidden="true">
+        {% include green/artwork.html kind=page.green_key %}
+    </div>
+
+    <div class="green-article-body">
+        {% if article_body == '<p>TEST</p>' or article_body == 'TEST' or article_body == '' %}
+            <div class="green-draft">
+                <p class="green-eyebrow">COMING SOON</p>
+                <h2>곧, 초록의 이야기를 전할게요.</h2>
+                <p>{{ page.title | escape }}의 자세한 내용은 준비 중입니다.</p>
+            </div>
+        {% else %}
+            {{ content }}
+        {% endif %}
+
+        {% if page.green_key == 'introduction' %}
+            <section class="green-candidates" aria-labelledby="green-candidates-title">
+                <h2 id="green-candidates-title">초록의 후보자들을 만나보세요.</h2>
+                {% for candidate in site.author.links %}
+                    <a class="green-candidate" href="{{ candidate.url | escape }}" target="_blank" rel="noopener noreferrer">
+                        <span>{{ candidate.label | escape }}</span>
+                        <span>Instagram <span aria-hidden="true">↗</span><span class="green-sr-only"> (새 창)</span></span>
+                    </a>
+                {% endfor %}
+            </section>
+        {% endif %}
+    </div>
+</article>
+
+<section class="green-related" aria-labelledby="green-related-title">
+    <div class="green-section-heading">
+        <h2 id="green-related-title">초록의 다른 이야기</h2>
+        <a href="{{ '/' | relative_url }}#stories">모든 이야기 <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="green-related-grid">
+        {% assign related_count = 0 %}
+        {% for item in site.data.green.items %}
+            {% unless item.key == page.green_key %}
+                {% if related_count < 3 %}
+                    <a class="green-related-card" href="{{ item.url | relative_url }}">
+                        <div class="green-related-art" aria-hidden="true">
+                            {% include green/artwork.html kind=item.artwork %}
+                        </div>
+                        <p class="green-eyebrow">{{ item.category | escape }}</p>
+                        <h3>{{ item.title | escape }}</h3>
+                        <p>{{ item.description | escape }}</p>
+                    </a>
+                    {% assign related_count = related_count | plus: 1 %}
+                {% endif %}
+            {% endunless %}
+        {% endfor %}
+    </div>
+</section>

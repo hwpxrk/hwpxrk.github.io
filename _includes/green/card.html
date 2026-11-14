@@ -1,0 +1,9 @@
+<article class="green-card">
+    <a class="green-card-link" href="{{ include.item.url | relative_url }}">
+        <div class="green-card-art">{% include green/artwork.html kind=include.item.artwork %}<span class="green-card-hover">이야기 읽기 {% include green/icon.html name='diagonal' %}</span></div>
+        <div class="green-card-meta"><span>{{ include.item.kicker }}</span><span>초록</span></div>
+        <h3>{{ include.item.title }}</h3>
+        <p>{{ include.item.description }}</p>
+    </a>
+    <a class="green-category" href="{{ include.item.url | relative_url }}">{{ include.item.category }}</a>
+</article>

@@ -1,0 +1,11 @@
+<svg class="green-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+    {% case include.name %}
+    {% when 'search' %}<circle cx="10.5" cy="10.5" r="7.5"></circle><path d="m16 16 5 5"></path>
+    {% when 'close' %}<path d="m5 5 14 14M5 19 19 5"></path>
+    {% when 'menu' %}<path d="M3 7h18M3 17h18"></path>
+    {% when 'arrow-left' %}<path d="M20 12H4m6-6-6 6 6 6"></path>
+    {% when 'arrow-up' %}<path d="M12 20V4m-6 6 6-6 6 6"></path>
+    {% when 'diagonal' %}<path d="M5 19 19 5M5 5h14v14"></path>
+    {% else %}<path d="M4 12h16m-6-6 6 6-6 6"></path>
+    {% endcase %}
+</svg>

@@ -1,0 +1,65 @@
+items:
+    - key: abstract
+      title: '초록'
+      description: '초록에 오신 여러분을 진심으로 환영합니다.'
+      url: '/abstract/'
+      category: '소개'
+      kicker: 'ABOUT GREEN'
+      artwork: abstract
+    - key: introduction
+      title: '후보자'
+      description: '초록의 후보자들을 만나보세요.'
+      url: '/introduction/'
+      category: '사람'
+      kicker: 'OUR PEOPLE'
+      artwork: introduction
+    - key: statement
+      title: '출마의 변'
+      description: '당신의 모든 계절이 초록으로 기억되기를 바라며,'
+      url: '/statement/'
+      category: '이야기'
+      kicker: 'OUR STORY'
+      artwork: statement
+    - key: dreams
+      title: '공약'
+      description: '초록이 가진 몇 개의 챕터를 소개합니다.'
+      url: '/dreams/'
+      category: '약속'
+      kicker: 'NEXT CHAPTER'
+      artwork: dreams
+    - key: writers
+      title: '필진'
+      description: '초록의 필진을 소개합니다.'
+      url: '/writers/'
+      category: '사람'
+      kicker: 'GREEN WRITERS'
+      artwork: writers
+
+hero:
+    - key: statement
+      lines:
+          - '당신의 모든 계절이'
+          - '초록으로 기억되기를'
+      description: '당신의 모든 계절이 초록으로 기억되기를 바라며,'
+      url: '/statement/'
+      category: '출마의 변'
+      kicker: 'OUR STORY'
+      artwork: statement
+    - key: introduction
+      lines:
+          - '초록을 만들어 갈'
+          - '사람들을 만나요'
+      description: '초록의 후보자들을 만나보세요.'
+      url: '/introduction/'
+      category: '후보자'
+      kicker: 'OUR PEOPLE'
+      artwork: introduction
+    - key: dreams
+      lines:
+          - '우리의 내일을 위한'
+          - '초록의 다음 챕터'
+      description: '초록이 가진 몇 개의 챕터를 소개합니다.'
+      url: '/dreams/'
+      category: '공약'
+      kicker: 'NEXT CHAPTER'
+      artwork: dreams

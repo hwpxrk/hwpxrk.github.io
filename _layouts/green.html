@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% if page.title %}{{ page.title | escape }} | {% endif %}{{ site.title | escape }}</title>
+        <meta name="description" content="{{ page.description | default: site.description | escape }}">
+        <meta name="theme-color" content="#10771a">
+        <link rel="canonical" href="{{ page.url | absolute_url }}">
+        <meta property="og:type" content="website">
+        <meta property="og:locale" content="ko_KR">
+        <meta property="og:title" content="{{ page.title | default: site.title | escape }}">
+        <meta property="og:description" content="{{ page.description | default: site.description | escape }}">
+        <meta property="og:url" content="{{ page.url | absolute_url }}">
+        <meta property="og:image" content="{{ site.og_image | absolute_url }}">
+        {% include head/custom.html %}
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+        <link rel="stylesheet" href="{{ '/assets/css/green.css' | relative_url }}">
+        <script src="{{ '/assets/js/green/main.js' | relative_url }}" defer></script>
+    </head>
+    <body class="green-site{% if page.url == '/' %} green-home{% endif %}">
+        <a class="green-skip-link" href="#main">본문 바로가기</a>
+        <div class="green-announcement" data-announcement>
+            <a href="{{ '/statement/' | relative_url }}">당신의 모든 계절이 초록으로 기억되기를 <span aria-hidden="true">↗</span></a>
+            <button type="button" data-banner-close aria-label="상단 알림 닫기">{% include green/icon.html name='close' %}</button>
+        </div>
+        <header class="green-header">
+            <a class="green-brand" href="{{ '/' | relative_url }}" aria-label="초록 홈"><img src="{{ site.logo | relative_url }}" width="49" height="38" alt="" fetchpriority="high"><span>초록<span class="green-brand-dot">.</span></span></a>
+            <nav class="green-desktop-nav" aria-label="주 메뉴">
+                {% for link in site.data.navigation.main %}<a href="{{ link.url | relative_url }}"{% if page.url == link.url %} aria-current="page"{% endif %}>{{ link.title }}</a>{% endfor %}
+            </nav>
+            <div class="green-header-actions">
+                <button class="green-icon-button" type="button" data-search-open aria-label="검색 열기" aria-haspopup="dialog" aria-controls="green-search">{% include green/icon.html name='search' %}</button>
+                <button class="green-icon-button green-menu-button" type="button" data-menu-open aria-label="전체 메뉴 열기" aria-haspopup="dialog" aria-controls="green-menu">{% include green/icon.html name='menu' %}</button>
+            </div>
+        </header>
+        <noscript><nav class="green-noscript-nav" aria-label="주 메뉴">{% for link in site.data.navigation.main %}<a href="{{ link.url | relative_url }}">{{ link.title }}</a>{% endfor %}</nav></noscript>
+        <main id="main">{{ content }}</main>
+        <footer class="green-footer">
+            <div class="green-footer-top"><p>성균관대학교<br>{{ site.description }}</p><nav aria-label="하단 메뉴">{% for link in site.data.navigation.main %}<a href="{{ link.url | relative_url }}">{{ link.title }}</a>{% endfor %}</nav></div>
+            <a class="green-footer-wordmark" href="{{ '/' | relative_url }}" aria-label="초록 홈">GREEN<span>↗</span></a>
+            <div class="green-footer-bottom"><span>우리의 모든 계절에, 초록.</span><span>© {{ site.time | date: '%Y' }} {{ site.title }}.</span></div>
+        </footer>
+        <button class="green-back-top green-round-button" type="button" data-back-top aria-label="맨 위로" hidden>{% include green/icon.html name='arrow-up' %}</button>
+        {% include green/dialogs.html %}
+        {% assign green_pages = site.pages | where_exp: 'item', 'item.green_key' | sort: 'green_order' %}
+        {% capture search_json %}
+            [{% for green_page in green_pages %}{% assign search_item = site.data.green.items | where: 'key', green_page.green_key | first %}{"title": {{ green_page.title | jsonify }}, "description": {{ green_page.description | jsonify }}, "content": {{ green_page.content | markdownify | strip_html | replace: 'TEST', '' | jsonify }}, "category": {{ search_item.category | jsonify }}, "url": {{ green_page.url | relative_url | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]
+        {% endcapture %}
+        <script id="green-search-data" type="application/json">{{ search_json | replace: '<', '\u003c' }}</script>
+    </body>
+</html>
