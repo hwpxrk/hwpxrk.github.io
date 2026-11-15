@@ -16,17 +16,34 @@ description: '당신의 모든 계절이 초록으로 기억되기를. 성균관
                 <p class="green-hero-description">{{ slide.description }}</p>
                 <a class="green-text-link" href="{{ slide.url | relative_url }}">{{ slide.category }} 알아보기 {% include green/icon.html name='arrow' %}</a>
             </div>
+            {% if slide.key == 'statement' %}
+            <div class="green-hero-stack" role="group" aria-label="출마의 변과 후보자의 한마디">
+                <a class="green-stack-card green-stack-cover" href="{{ slide.url | relative_url }}" aria-label="출마의 변 읽기">
+                    {% include green/artwork.html kind=slide.artwork %}
+                    <span class="green-art-link" aria-hidden="true">{% include green/icon.html name='diagonal' %}</span>
+                </a>
+                {% for candidate in site.data.green.candidate_messages %}
+                <a class="green-stack-card green-stack-message" href="{{ candidate.url | relative_url }}">
+                    <span class="green-stack-caption">
+                        <span><span class="green-stack-role">{{ candidate.role }}</span> <strong>{{ candidate.name }}</strong><span class="green-stack-note">의 한마디</span></span>
+                        {% include green/icon.html name='diagonal' %}
+                    </span>
+                </a>
+                {% endfor %}
+            </div>
+            {% else %}
             <a class="green-hero-art" href="{{ slide.url | relative_url }}" aria-label="{{ slide.lines | join: ' ' }} 읽기">
                 {% include green/artwork.html kind=slide.artwork %}
                 <span class="green-art-link">{% include green/icon.html name='diagonal' %}</span>
             </a>
+            {% endif %}
         </div>
         {% endfor %}
     </div>
     <button class="green-hero-arrow green-hero-prev" type="button" data-slide-prev aria-label="이전 이야기">{% include green/icon.html name='arrow-left' %}</button>
     <button class="green-hero-arrow green-hero-next" type="button" data-slide-next aria-label="다음 이야기">{% include green/icon.html name='arrow' %}</button>
     <div class="green-hero-controls">
-        <span class="green-slide-count"><span data-slide-current>01</span> / 03</span>
+        <span class="green-slide-count"><span data-slide-current>01</span> / {% if site.data.green.hero.size < 10 %}0{% endif %}{{ site.data.green.hero.size }}</span>
         <div class="green-slide-dots" aria-label="이야기 선택">
             {% for slide in site.data.green.hero %}
             <button class="green-slide-dot{% if forloop.first %} is-active{% endif %}" type="button" data-slide-to="{{ forloop.index0 }}" aria-label="{{ forloop.index }}번째 이야기: {{ slide.lines | join: ' ' }}"{% if forloop.first %} aria-current="true"{% endif %}><span></span></button>

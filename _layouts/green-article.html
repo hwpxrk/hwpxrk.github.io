@@ -5,19 +5,20 @@ layout: green
 {% assign article_body = content | strip %}
 <article class="green-article">
     <nav class="green-breadcrumb" aria-label="현재 위치">
-        <a href="{{ '/' | relative_url }}">홈</a>
+        <a href="{{ '/' | relative_url }}">초록</a>
         <span aria-hidden="true">/</span>
         <span aria-current="page">{{ page.title | escape }}</span>
     </nav>
 
     <header class="green-article-header">
-        <p class="green-eyebrow">{{ article_item.kicker | escape }}</p>
+        <p class="green-eyebrow">{{ page.green_kicker | default: article_item.kicker | escape }}</p>
         <h1>{{ page.title | escape }}</h1>
         <p>{{ page.description | escape }}</p>
     </header>
 
     <div class="green-article-art" aria-hidden="true">
-        {% include green/artwork.html kind=page.green_key %}
+        {% assign article_artwork = page.green_artwork | default: page.green_key %}
+        {% include green/artwork.html kind=article_artwork %}
     </div>
 
     <div class="green-article-body">

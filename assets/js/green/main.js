@@ -266,19 +266,18 @@
         const pause_button = hero.querySelector('[data-slide-pause]');
         const slide_current = hero.querySelector('[data-slide-current]');
         let slide_index = 0;
-        let user_paused = reduced_motion.matches;
-        let pointer_inside = false;
+        let user_paused = false;
         let focus_inside = false;
-        let ignore_current_pointer = false;
         let ignore_current_focus = false;
         let slide_timer;
+        let slide_animations = [];
         let touch_start = null;
         let suppress_click = false;
 
         function update_playback() {
             clearTimeout(slide_timer);
             const can_play = slides.length > 1 && !user_paused &&
-                (!pointer_inside || ignore_current_pointer) && (!focus_inside || ignore_current_focus) &&
+                (!focus_inside || ignore_current_focus) &&
                 !document.hidden && !dialogs.some((dialog) => dialog.open);
 
             hero.classList.toggle('is-playing', can_play);
@@ -291,8 +290,16 @@
             }
 
             if (can_play) {
-                slide_timer = setTimeout(() => show_slide(slide_index + 1), 10000);
+                slide_timer = setTimeout(() => show_slide(slide_index + 1), 5000);
             }
+        }
+
+        function cancel_slide_animations() {
+            for (const animation of slide_animations) {
+                animation.cancel();
+            }
+
+            slide_animations = [];
         }
 
         function show_slide(next_index, manual = false) {
@@ -301,15 +308,41 @@
             }
 
             if (manual) {
-                ignore_current_pointer = false;
                 ignore_current_focus = false;
             }
 
+            const previous_index = slide_index;
+            const direction = next_index < previous_index ? -1 : 1;
+
             slide_index = (next_index + slides.length) % slides.length;
+            cancel_slide_animations();
+
+            if (previous_index !== slide_index && slides[previous_index].contains(document.activeElement)) {
+                hero.focus({preventScroll: true});
+            }
 
             for (const [index, slide] of slides.entries()) {
-                slide.hidden = index !== slide_index;
-                slide.setAttribute('aria-hidden', String(index !== slide_index));
+                const active = index === slide_index;
+
+                slide.hidden = false;
+                slide.inert = !active;
+                slide.setAttribute('aria-hidden', String(!active));
+            }
+
+            if (previous_index !== slide_index && !reduced_motion.matches) {
+                const slide_distance = hero.clientWidth;
+                const animation_options = {duration: 500, easing: 'cubic-bezier(.22, .61, .36, 1)'};
+
+                slide_animations = [
+                    slides[previous_index].animate([
+                        {transform: 'translateX(0)', visibility: 'visible'},
+                        {transform: `translateX(${-direction * slide_distance}px)`, visibility: 'visible'},
+                    ], animation_options),
+                    slides[slide_index].animate([
+                        {transform: `translateX(${direction * slide_distance}px)`},
+                        {transform: 'translateX(0)'},
+                    ], animation_options),
+                ];
             }
 
             for (const dot of dots) {
@@ -337,23 +370,8 @@
 
         pause_button?.addEventListener('click', () => {
             user_paused = !user_paused;
-            // A deliberate play action takes precedence over the focus and hover that activated it.
-            ignore_current_pointer = !user_paused && pointer_inside;
+            // A deliberate play action takes precedence over the focus that activated it.
             ignore_current_focus = !user_paused && focus_inside;
-            update_playback();
-        });
-
-        hero.addEventListener('pointerenter', (event) => {
-            if (event.pointerType === 'mouse') {
-                pointer_inside = true;
-                ignore_current_pointer = false;
-                update_playback();
-            }
-        });
-
-        hero.addEventListener('pointerleave', () => {
-            pointer_inside = false;
-            ignore_current_pointer = false;
             update_playback();
         });
 
@@ -382,7 +400,6 @@
 
         hero.addEventListener('pointerdown', (event) => {
             if (!event.target.closest('[data-slide-pause]')) {
-                ignore_current_pointer = false;
                 ignore_current_focus = false;
                 update_playback();
             }
@@ -424,10 +441,8 @@
         document.addEventListener('visibilitychange', update_playback);
         reduced_motion.addEventListener('change', () => {
             if (reduced_motion.matches) {
-                user_paused = true;
+                cancel_slide_animations();
             }
-
-            update_playback();
         });
 
         for (const dialog of dialogs) {

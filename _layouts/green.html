@@ -46,7 +46,7 @@
         {% include green/dialogs.html %}
         {% assign green_pages = site.pages | where_exp: 'item', 'item.green_key' | sort: 'green_order' %}
         {% capture search_json %}
-            [{% for green_page in green_pages %}{% assign search_item = site.data.green.items | where: 'key', green_page.green_key | first %}{"title": {{ green_page.title | jsonify }}, "description": {{ green_page.description | jsonify }}, "content": {{ green_page.content | markdownify | strip_html | replace: 'TEST', '' | jsonify }}, "category": {{ search_item.category | jsonify }}, "url": {{ green_page.url | relative_url | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]
+            [{% for green_page in green_pages %}{% assign search_item = site.data.green.items | where: 'key', green_page.green_key | first %}{"title": {{ green_page.title | jsonify }}, "description": {{ green_page.description | jsonify }}, "content": {{ green_page.content | markdownify | strip_html | replace: 'TEST', '' | jsonify }}, "category": {{ search_item.category | default: green_page.category | jsonify }}, "url": {{ green_page.url | relative_url | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]
         {% endcapture %}
         <script id="green-search-data" type="application/json">{{ search_json | replace: '<', '\u003c' }}</script>
     </body>

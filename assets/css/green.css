@@ -106,7 +106,7 @@ h1, h2, h3 {
 
 ::selection {
     color: #fff;
-    background: var(--green);
+    background: #124532;
 }
 
 .green-sr-only {
@@ -265,23 +265,31 @@ h1, h2, h3 {
 .green-hero {
     position: relative;
     padding: 32px 0 40px;
+    overflow: clip;
     background: var(--paper);
     touch-action: pan-y;
 }
 
 .green-hero-inner {
+    display: grid;
     width: min(100% - 240px, 1160px);
     margin-inline: auto;
 }
 
 .green-slide {
     display: grid;
+    grid-area: 1 / 1;
     grid-template-columns: 1fr 1fr;
     align-items: center;
     gap: 70px;
+    min-width: 0;
     min-height: 620px;
     padding-bottom: 36px;
-    animation: green-appear .6s both;
+}
+
+.green-slide[aria-hidden='true'] {
+    visibility: hidden;
+    pointer-events: none;
 }
 
 .green-eyebrow {
@@ -364,6 +372,89 @@ h1, h2, h3 {
 .green-hero-art > .green-artwork {
     position: relative;
     z-index: 1;
+}
+
+.green-hero-stack {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    padding-right: 36px;
+    padding-bottom: 144px;
+}
+
+.green-stack-card {
+    display: block;
+    aspect-ratio: 1;
+    box-shadow: 5px 6px 18px #0002;
+}
+
+.green-stack-cover {
+    position: relative;
+    z-index: 4;
+}
+
+.green-stack-message {
+    position: absolute;
+    top: 48px;
+    left: 12px;
+    z-index: 3;
+    width: calc(100% - 36px);
+    color: #173e28;
+    background: #bdd0ac;
+}
+
+.green-stack-message:nth-child(3) {
+    top: 96px;
+    left: 24px;
+    z-index: 2;
+    background: #d8e3c9;
+}
+
+.green-stack-message:nth-child(4) {
+    top: 144px;
+    left: 36px;
+    z-index: 1;
+    background: #edf1e6;
+}
+
+.green-stack-caption {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    height: 48px;
+    padding-inline: 20px;
+    font-size: 16px;
+}
+
+.green-stack-role {
+    margin-right: 8px;
+    font-size: 13px;
+}
+
+.green-stack-note {
+    margin-left: 5px;
+    font-size: 13px;
+}
+
+.green-stack-caption > .green-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    transition: transform .2s;
+}
+
+.green-stack-message:hover .green-stack-caption > .green-icon {
+    transform: translate(2px, -2px);
+}
+
+.green-stack-message:focus-visible .green-stack-caption {
+    outline: 2px solid currentColor;
+    outline-offset: -5px;
 }
 
 .green-art-link {
@@ -458,7 +549,7 @@ h1, h2, h3 {
 }
 
 .is-playing .green-slide-dot.is-active span {
-    animation: green-progress 10s linear;
+    animation: green-progress 5s linear;
 }
 
 .green-pause {
@@ -1261,6 +1352,23 @@ h1, h2, h3 {
     margin-top: 24px;
 }
 
+.green-article-body ul,
+.green-article-body ol {
+    margin-block: 24px;
+    padding-left: 1.4em;
+}
+
+.green-article-body li + li {
+    margin-top: 12px;
+}
+
+.green-article-body blockquote {
+    margin: 32px 0;
+    padding: 20px 24px;
+    background: #f4f5f1;
+    border-left: 4px solid var(--green);
+}
+
 .green-article-body a:not(.green-candidate) {
     text-decoration: underline;
     text-underline-offset: 4px;
@@ -1284,6 +1392,90 @@ h1, h2, h3 {
 
 .green-candidates {
     margin-top: 60px;
+}
+
+.green-profile {
+    display: grid;
+    grid-template-areas:
+        'portrait heading'
+        '. timeline';
+    grid-template-columns: 160px minmax(0, 1fr);
+    gap: 28px 36px;
+    margin-block: 64px;
+}
+
+.green-profile-portrait {
+    grid-area: portrait;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+}
+
+.green-profile-header {
+    grid-area: heading;
+    align-self: start;
+}
+
+.green-article-body .green-profile-heading {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    margin: 0;
+    font-size: 32px;
+}
+
+.green-profile-role {
+    font-size: 18px;
+    font-weight: 650;
+    letter-spacing: 0;
+}
+
+.green-profile-name {
+    letter-spacing: .2em;
+}
+
+.green-profile-major {
+    margin-top: 20px;
+    color: var(--muted);
+    font-size: 16px;
+}
+
+.green-profile > .green-timeline {
+    grid-area: timeline;
+    margin: 0;
+}
+
+.green-timeline {
+    display: grid;
+    grid-template-columns: 96px minmax(0, 1fr);
+    margin: 32px 0 44px;
+}
+
+.green-timeline dt {
+    font-weight: 750;
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: normal;
+}
+
+.green-timeline dd {
+    margin: 0;
+    padding: 0 0 32px 24px;
+    border-left: 2px solid #d6d6d3;
+}
+
+.green-timeline dd:last-child {
+    padding-bottom: 0;
+}
+
+.green-article-body .green-timeline ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.green-timeline li + li {
+    margin-top: 8px;
 }
 
 .green-candidates h2 {
@@ -1344,11 +1536,6 @@ h1, h2, h3 {
 
 .green-related-card > p:last-child {
     color: var(--muted);
-}
-
-@keyframes green-appear {
-    from { transform: translateY(12px); }
-    to { transform: translateY(0); }
 }
 
 @keyframes green-progress {
@@ -1647,6 +1834,25 @@ h1, h2, h3 {
         margin-right: 18px;
     }
 
+    .green-hero-stack {
+        align-self: center;
+        width: min(100%, 376px);
+    }
+
+    .green-stack-caption {
+        padding-inline: 12px;
+        font-size: 14px;
+    }
+
+    .green-stack-role {
+        margin-right: 5px;
+        font-size: 11px;
+    }
+
+    .green-stack-note {
+        font-size: 11px;
+    }
+
     .green-art-link {
         right: 15px;
         bottom: 13px;
@@ -1918,6 +2124,30 @@ h1, h2, h3 {
         font-size: 16px;
     }
 
+    .green-profile {
+        grid-template-areas:
+            'portrait heading'
+            'timeline timeline';
+        grid-template-columns: 88px minmax(0, 1fr);
+        gap: 28px 20px;
+        margin-block: 48px;
+    }
+
+    .green-article-body .green-profile-heading {
+        gap: 6px 10px;
+        font-size: 25px;
+    }
+
+    .green-profile-role {
+        font-size: 14px;
+    }
+
+    .green-profile-major {
+        margin-top: 12px;
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
     .green-draft {
         padding: 35px 20px;
     }
@@ -1932,6 +2162,19 @@ h1, h2, h3 {
 
     .green-candidate {
         font-size: 14px;
+    }
+
+    .green-timeline {
+        grid-template-columns: 76px minmax(0, 1fr);
+    }
+
+    .green-timeline dt {
+        font-size: 14px;
+        line-height: calc(16px * 1.9);
+    }
+
+    .green-timeline dd {
+        padding-left: 16px;
     }
 
     .green-candidate > span:last-child {
