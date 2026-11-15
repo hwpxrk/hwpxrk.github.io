@@ -1,7 +1,7 @@
 items:
     - key: abstract
       title: '초록'
-      description: '우리만의 초록을 정의하는 그 순간의 중심에 서겠습니다.'
+      description: '우리만의 초록을 정의하는 그 순간의 중심에 서있는 학생회'
       url: '/abstract/'
       category: '소개'
       kicker: 'ABOUT GREEN'
@@ -49,9 +49,9 @@ candidate_messages:
 hero:
     - key: abstract
       lines:
-          - '반가워요,'
-          - '우리는 초록입니다'
-      description: '우리만의 초록을 정의하는 그 순간의 중심에 서겠습니다.'
+          - '초록을'
+          - '소개합니다.'
+      description: '초록에 함께하는 여러분을 진심으로 환영합니다.'
       url: '/abstract/'
       category: '초록 소개'
       kicker: 'ABOUT GREEN'
