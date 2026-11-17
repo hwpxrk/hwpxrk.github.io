@@ -9,6 +9,12 @@ layout: green-article
 permalink: '/abstract/'
 green_key: abstract
 green_order: 1
+green_home: true
+green_kicker: '초록? 초록!'
+green_hero_order: 1
+green_cover_lines:
+    - '여러분을'
+    - '초록에 초대합니다.'
 editorial_status: draft
 
 category: '초록'

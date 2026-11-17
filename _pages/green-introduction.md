@@ -1,11 +1,20 @@
 ---
-title: '후보자'
-description: '박현욱·송선빈·조연정, 초록의 다음 챕터를 함께 열겠습니다.'
+title: '후보자 소개'
+description: '초록을 이끌어 갈 후보자를 소개합니다.'
+
+date: '2026-11-18'
+author: '초록'
 
 layout: green-article
 permalink: '/introduction/'
 green_key: introduction
 green_order: 2
+green_home: true
+green_kicker: '우리는 초록입니다.'
+green_hero_order: 3
+green_cover_lines:
+    - '초록을 이끌어 갈'
+    - '후보자를 소개합니다.'
 editorial_status: draft
 
 category: '초록'

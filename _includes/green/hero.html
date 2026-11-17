@@ -1,20 +1,19 @@
-<div class="green-artwork-hero green-artwork-{{ include.kind }}" aria-hidden="true">
+{% assign artwork_kind = include.item.green_artwork | default: include.item.green_key %}
+{% assign artwork_page = site.pages | where: 'green_key', artwork_kind | first %}
+{% assign artwork_lines = include.item.green_cover_lines | default: artwork_page.green_cover_lines %}
+<div class="green-artwork-hero green-artwork-{{ artwork_kind | escape }}" aria-hidden="true">
     <img class="green-artwork-brand" src="{{ site.logo | relative_url }}" width="49" height="38" alt="">
-    {% case include.kind %}
+    <span class="green-poster-title">{% if artwork_lines %}{% for line in artwork_lines %}{{ line | escape }}{% unless forloop.last %}<br>{% endunless %}{% endfor %}{% else %}{{ include.item.title | escape }}{% endif %}</span>
+    {% case artwork_kind %}
     {% when 'statement' %}
-        <span class="green-poster-title">모두가<br>초록에<br>진심</span>
         <div class="green-poster-flower green-artwork-background"><i></i><i></i><i></i><i></i></div>
     {% when 'introduction' %}
-        <span class="green-poster-title">같이 만드는<br>우리의 다음.</span>
         <div class="green-poster-people green-artwork-background"><i></i><i></i><i></i></div>
     {% when 'dreams' %}
-        <span class="green-poster-title">내일을 향한<br>초록의 약속.</span>
         <span class="green-poster-asterisk green-artwork-background">✳</span>
     {% when 'writers' %}
-        <span class="green-poster-title">우리의 말이<br>이야기가 될 때.</span>
         <span class="green-poster-quotes green-artwork-background">“ ”</span>
     {% else %}
-        <span class="green-poster-title">여러분을<br>초록에 초대합니다.</span>
         <img class="green-poster-logo green-artwork-background" src="{{ site.logo | relative_url }}" width="260" height="202" alt="">
     {% endcase %}
 </div>

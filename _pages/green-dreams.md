@@ -1,11 +1,20 @@
 ---
-title: '공약'
-description: '소통, 복지, 교육, 투명. 학우 여러분과 함께 만들어 갈 초록의 20가지 약속을 소개합니다.'
+title: '우리가 초록에 함께해야 하는 이유'
+description: '초록이 함께 써내려 갈 스무 가지의 약속을 소개합니다.'
+
+date: '2026-11-18'
+author: '초록'
 
 layout: green-article
 permalink: '/dreams/'
 green_key: dreams
 green_order: 4
+green_home: true
+green_kicker: '초록의 공약'
+green_hero_order: 4
+green_cover_lines:
+    - '우리가 초록에'
+    - '함께해야 하는 이유'
 editorial_status: draft
 
 category: '초록'

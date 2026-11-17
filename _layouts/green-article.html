@@ -1,7 +1,7 @@
 ---
 layout: green
 ---
-{% assign article_item = site.data.green.items | where: 'key', page.green_key | first %}
+{% include green/content-data.html %}
 {% assign article_body = content | strip %}
 <article class="green-article">
     <nav class="green-breadcrumb" aria-label="현재 위치">
@@ -11,14 +11,13 @@ layout: green
     </nav>
 
     <header class="green-article-header">
-        <p class="green-eyebrow">{{ page.green_kicker | default: article_item.kicker | escape }}</p>
+        <p class="green-eyebrow">{{ page.green_kicker | escape }}</p>
         <h1>{{ page.title | escape }}</h1>
         <p>{{ page.description | escape }}</p>
     </header>
 
     <div class="green-article-art" aria-hidden="true">
-        {% assign article_artwork = page.green_artwork | default: page.green_key %}
-        {% include green/hero.html kind=article_artwork %}
+        {% include green/hero.html item=page %}
     </div>
 
     <div class="green-article-body">
@@ -35,9 +34,9 @@ layout: green
         {% if page.green_key == 'introduction' %}
             <section class="green-candidates" aria-labelledby="green-candidates-title">
                 <h2 id="green-candidates-title">초록의 후보자들을 만나보세요.</h2>
-                {% for candidate in site.author.links %}
-                    <a class="green-candidate" href="{{ candidate.url | escape }}" target="_blank" rel="noopener noreferrer">
-                        <span>{{ candidate.label | escape }}</span>
+                {% for candidate in green_writers %}
+                    <a class="green-candidate" href="{{ candidate.writer.instagram | escape }}" target="_blank" rel="noopener noreferrer">
+                        <span>{% if candidate.writer.role == '부후보' %}{{ candidate.writer.major | escape }} {% endif %}{{ candidate.writer.role | escape }}</span>
                         <span>Instagram <span aria-hidden="true">↗</span><span class="green-sr-only"> (새 창)</span></span>
                     </a>
                 {% endfor %}
@@ -53,12 +52,12 @@ layout: green
     </div>
     <div class="green-related-grid">
         {% assign related_count = 0 %}
-        {% for item in site.data.green.items %}
-            {% unless item.key == page.green_key %}
-                {% if related_count < 3 %}
+        {% for item in green_stories %}
+            {% unless item.green_key == page.green_key %}
+                {% if related_count < site.data.green.related_limit %}
                     <a class="green-related-card" href="{{ item.url | relative_url }}">
                         <div class="green-related-art" aria-hidden="true">
-                            {% include green/hero.html kind=item.artwork %}
+                            {% include green/hero.html item=item %}
                         </div>
                         <p class="green-eyebrow">{{ item.category | escape }}</p>
                         <h3>{{ item.title | escape }}</h3>

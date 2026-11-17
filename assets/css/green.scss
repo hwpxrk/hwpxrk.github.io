@@ -2259,21 +2259,19 @@ html.green-js .green-card-track {
         display: none;
     }
 
-    .green-card-track {
-        --visible-cards: 1;
-        --card-gap: 1.25rem;
-    }
-
+    .green-card-track,
     html.green-js .green-card-track {
+        --card-gap: 1.25rem;
+
         overflow-x: auto;
 
-        scroll-snap-type: x mandatory;
+        scroll-snap-type: none;
         scrollbar-width: none;
         touch-action: auto;
     }
 
     .green-card {
-        scroll-snap-stop: always;
+        flex-basis: min(18.75rem, calc(100% - 3rem));
     }
 
     .green-card p {

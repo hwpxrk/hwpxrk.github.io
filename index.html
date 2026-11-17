@@ -3,35 +3,34 @@ layout: green
 description: '여러분을 초록에 초대합니다.'
 ---
 
+{% include green/content-data.html %}
 <h1 class="green-sr-only">초록 - 우리의 모든 계절이 초록으로 기억되기를 바라며</h1>
 <section class="green-hero" data-hero data-theme="green" aria-label="초록의 주요 이야기" aria-roledescription="캐러셀" tabindex="0">
     <div class="green-hero-inner">
-        {% for slide in site.data.green.hero %}
+        {% for slide in green_slides %}
         <div class="green-slide" data-slide data-theme="{% cycle 'green', 'lime', 'cream' %}" role="group" aria-roledescription="슬라이드" aria-label="{{ forloop.index }} / {{ forloop.length }}"{% unless forloop.first %} hidden{% endunless %}>
             <div class="green-hero-copy">
-                <p class="green-eyebrow">{{ slide.kicker }}</p>
-                <h2>
-                    {% for line in slide.lines %}<span>{{ line }}</span>{% endfor %}
-                </h2>
-                <p class="green-hero-description">{{ slide.description }}</p>
+                <p class="green-eyebrow">{{ slide.green_kicker | escape }}</p>
+                <h2><span>{{ slide.title | escape }}</span></h2>
+                <p class="green-hero-description">{{ slide.description | escape }}</p>
             </div>
-            {% if slide.key == 'statement' %}
+            {% if slide.green_key == 'statement' %}
             <div class="green-hero-stack" role="group" aria-label="출마의 변과 후보자의 한마디">
-                <a class="green-stack-card green-stack-cover" href="{{ slide.url | relative_url }}" aria-label="출마의 변 읽기">
-                    {% include green/hero.html kind=slide.artwork %}
+                <a class="green-stack-card green-stack-cover" href="{{ slide.url | relative_url }}" aria-label="{{ slide.title | escape }} 읽기">
+                    {% include green/hero.html item=slide %}
                 </a>
-                {% for candidate in site.data.green.candidate_messages %}
+                {% for candidate in green_writers %}
                 <a class="green-stack-card green-stack-message" href="{{ candidate.url | relative_url }}">
                     <span class="green-stack-caption">
-                        <span><span class="green-stack-role">{{ candidate.role }}</span> <strong>{{ candidate.name }}</strong><span class="green-stack-note">의 한마디</span></span>
+                        <span><span class="green-stack-role">{{ candidate.writer.role | escape }}</span> <strong>{{ candidate.writer.name | escape }}</strong><span class="green-stack-note">의 한마디</span></span>
                         {% include green/icon.html name='diagonal' %}
                     </span>
                 </a>
                 {% endfor %}
             </div>
             {% else %}
-            <a class="green-hero-art" href="{{ slide.url | relative_url }}" aria-label="{{ slide.lines | join: ' ' }} 읽기">
-                {% include green/hero.html kind=slide.artwork %}
+            <a class="green-hero-art" href="{{ slide.url | relative_url }}" aria-label="{{ slide.title | escape }} 읽기">
+                {% include green/hero.html item=slide %}
             </a>
             {% endif %}
         </div>
@@ -40,10 +39,10 @@ description: '여러분을 초록에 초대합니다.'
     <button class="green-hero-arrow green-hero-prev" type="button" data-slide-prev aria-label="이전 이야기">{% include green/icon.html name='arrow-left' %}</button>
     <button class="green-hero-arrow green-hero-next" type="button" data-slide-next aria-label="다음 이야기">{% include green/icon.html name='arrow' %}</button>
     <div class="green-hero-controls">
-        <span class="green-slide-count"><span data-slide-current>01</span> / {% if site.data.green.hero.size < 10 %}0{% endif %}{{ site.data.green.hero.size }}</span>
+        <span class="green-slide-count"><span data-slide-current>01</span> / {% if green_slides.size < 10 %}0{% endif %}{{ green_slides.size }}</span>
         <div class="green-slide-dots" aria-label="이야기 선택">
-            {% for slide in site.data.green.hero %}
-            <button class="green-slide-dot{% if forloop.first %} is-active{% endif %}" type="button" data-slide-to="{{ forloop.index0 }}" aria-label="{{ forloop.index }}번째 이야기: {{ slide.lines | join: ' ' }}"{% if forloop.first %} aria-current="true"{% endif %}><span></span></button>
+            {% for slide in green_slides %}
+            <button class="green-slide-dot{% if forloop.first %} is-active{% endif %}" type="button" data-slide-to="{{ forloop.index0 }}" aria-label="{{ forloop.index }}번째 이야기: {{ slide.title | escape }}"{% if forloop.first %} aria-current="true"{% endif %}><span></span></button>
             {% endfor %}
         </div>
         <button class="green-pause" type="button" data-slide-pause aria-label="자동 재생 일시 정지"><span class="green-pause-icon" aria-hidden="true"></span></button>
@@ -61,7 +60,7 @@ description: '여러분을 초록에 초대합니다.'
         </div>
     </div>
     <div class="green-card-track" role="group" aria-label="초록 콘텐츠 목록">
-        {% for item in site.data.green.items %}{% include green/card.html item=item %}{% endfor %}
+        {% for item in green_stories %}{% include green/card.html item=item %}{% endfor %}
     </div>
 </section>
 
@@ -82,10 +81,10 @@ description: '여러분을 초록에 초대합니다.'
         <!-- <p>궁금한 이야기부터 만나보세요.</p> -->
     </div>
     <div class="green-guide-grid">
-        {% for item in site.data.green.items limit: 6 %}
+        {% for item in green_stories limit: site.data.green.popular_limit %}
         <a class="green-guide-item" href="{{ item.url | relative_url }}">
-            <div class="green-guide-art">{% include green/hero.html kind=item.artwork %}</div>
-            <div class="green-guide-copy"><span class="green-guide-number">{{ forloop.index }}</span><h3>{{ item.title }}</h3><p>{{ item.description }}</p></div>
+            <div class="green-guide-art">{% include green/hero.html item=item %}</div>
+            <div class="green-guide-copy"><span class="green-guide-number">{{ forloop.index }}</span><h3>{{ item.title | escape }}</h3><p>{{ item.description | escape }}</p></div>
         </a>
         {% endfor %}
     </div>
@@ -98,12 +97,13 @@ description: '여러분을 초록에 초대합니다.'
         <!-- <a class="green-text-link" href="{{ '/introduction/' | relative_url }}">후보자 만나기 {% include green/icon.html name='arrow' %}</a> -->
     </div>
     <div class="green-people-list">
-        {% for person in site.data.green.writers %}
-        <a class="green-person" href="{{ person.url }}" target="_blank" rel="noopener noreferrer">
-            <span class="green-person-role">{{ person.role }}</span>
-            <h3>{{ person.name }}<span class="green-sr-only"> 인스타그램 (새 창)</span></h3>
-            <span class="green-person-major">{{ person.major }}</span>
-            <span class="green-person-message">{{ person.message }}</span>
+        {% for writer_page in green_writers %}
+        {% assign person = writer_page.writer %}
+        <a class="green-person" href="{{ person.instagram | escape }}" target="_blank" rel="noopener noreferrer">
+            <span class="green-person-role">{{ person.role | escape }}</span>
+            <h3>{{ person.name | escape }}<span class="green-sr-only"> 인스타그램 (새 창)</span></h3>
+            <span class="green-person-major">{{ person.major | escape }}</span>
+            <span class="green-person-message">{{ person.message | escape }}</span>
         </a>
         {% endfor %}
     </div>

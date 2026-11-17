@@ -510,6 +510,13 @@
         const edge_tolerance = 2;
         let rail_positions = [0];
         let rail_index = 0;
+        let was_mobile = mobile_rail.matches;
+
+        function nearest_rail_index(left) {
+            return rail_positions.reduce((nearest_index, position, index) =>
+                Math.abs(position - left) < Math.abs(rail_positions[nearest_index] - left) ?
+                    index : nearest_index, 0);
+        }
 
         function update_rail() {
             if (previous) {
@@ -569,15 +576,21 @@
             }
 
             rail_positions = positions;
-            rail_index = was_at_end ? positions.length - 1 : Math.min(rail_index, positions.length - 1);
+
+            if (mobile_rail.matches || was_mobile) {
+                rail_index = nearest_rail_index(current_left);
+            } else {
+                rail_index = was_at_end ? positions.length - 1 : Math.min(rail_index, positions.length - 1);
+            }
 
             if (mobile_rail.matches) {
                 track.tabIndex = 0;
             } else {
                 track.removeAttribute('tabindex');
+                track.scrollTo({left: rail_positions[rail_index], behavior: 'instant'});
             }
 
-            track.scrollTo({left: rail_positions[rail_index], behavior: 'instant'});
+            was_mobile = mobile_rail.matches;
             update_rail();
         }
 
@@ -591,9 +604,7 @@
         next?.addEventListener('click', () => scroll_rail(1));
         track.addEventListener('scroll', () => {
             if (mobile_rail.matches) {
-                rail_index = rail_positions.reduce((nearest_index, position, index) =>
-                    Math.abs(position - track.scrollLeft) < Math.abs(rail_positions[nearest_index] - track.scrollLeft) ?
-                        index : nearest_index, 0);
+                rail_index = nearest_rail_index(track.scrollLeft);
             }
 
             update_rail();

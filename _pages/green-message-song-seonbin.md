@@ -10,6 +10,13 @@ green_kicker: 'VOICES OF GREEN'
 green_artwork: statement
 editorial_status: placeholder
 
+writer:
+    name: '송선빈'
+    role: '부후보'
+    major: '산업인공지능전공'
+    message: '한마디 준비 중'
+    instagram: 'https://instagram.com/s_s_kong_03'
+
 category: '후보자의 한마디'
 tag: '초록'
 ---

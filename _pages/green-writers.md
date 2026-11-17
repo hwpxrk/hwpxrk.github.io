@@ -1,11 +1,19 @@
 ---
-title: '필진'
-description: '학부의 오늘을 기록하고, 다음 사람에게 전할 문장을 함께 씁니다.'
+title: '초록의 필진을 소개합니다.'
+description: '초록과 함께하는 다양한 필진을 소개합니다.'
+
+date: '2026-11-18'
+author: '초록'
 
 layout: green-article
 permalink: '/writers/'
 green_key: writers
 green_order: 5
+green_home: true
+green_kicker: '우리는 초록입니다.'
+green_cover_lines:
+    - '초록의 필진을'
+    - '소개합니다.'
 editorial_status: draft
 
 category: '초록'

@@ -2,10 +2,20 @@
 title: '출마의 변'
 description: '당신의 모든 계절이 초록으로 기억되기를 바라며,'
 
+date: '2026-11-18'
+author: '초록'
+
 layout: green-article
 permalink: '/statement/'
 green_key: statement
 green_order: 3
+green_home: true
+green_kicker: '모두가 초록에 진심'
+green_hero_order: 2
+green_cover_lines:
+    - '모두가'
+    - '초록에'
+    - '진심'
 editorial_status: draft
 
 category: '초록'

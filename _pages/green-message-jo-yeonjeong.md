@@ -10,6 +10,13 @@ green_kicker: 'VOICES OF GREEN'
 green_artwork: statement
 editorial_status: placeholder
 
+writer:
+    name: '조연정'
+    role: '부후보'
+    major: 'AI융합운영전공'
+    message: '한마디 준비 중'
+    instagram: 'https://instagram.com/_igotcrushonyou'
+
 category: '후보자의 한마디'
 tag: '초록'
 ---

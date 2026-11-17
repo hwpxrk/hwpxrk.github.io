@@ -10,6 +10,13 @@ green_kicker: 'VOICES OF GREEN'
 green_artwork: statement
 editorial_status: placeholder
 
+writer:
+    name: '박현욱'
+    role: '정후보'
+    major: '산업인공지능전공'
+    message: '한마디 준비 중'
+    instagram: 'https://instagram.com/hwpxrk_'
+
 category: '후보자의 한마디'
 tag: '초록'
 ---

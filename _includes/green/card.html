@@ -1,18 +1,18 @@
 <article class="green-card">
     <a class="green-card-link" href="{{ include.item.url | relative_url }}">
         <div class="green-card-art">
-            {% include green/hero.html kind=include.item.artwork %}
+            {% include green/hero.html item=include.item %}
             <div class="green-card-meta">
                 {% if include.item.date %}
                 <time datetime="{{ include.item.date | date: '%Y-%m-%d' }}">{{ include.item.date | date: '%Y.%m.%d' }}</time>
                 {% else %}
                 <span>게시일 준비 중</span>
                 {% endif %}
-                <span>{{ include.item.author | default: '초록' }}</span>
+                <span>{{ include.item.author | default: site.author.name | escape }}</span>
             </div>
         </div>
-        <h3>{{ include.item.title }}</h3>
-        <p>{{ include.item.description }}</p>
+        <h3>{{ include.item.title | escape }}</h3>
+        <p>{{ include.item.description | escape }}</p>
     </a>
-    <a class="green-category" href="{{ include.item.url | relative_url }}">{{ include.item.category }}</a>
+    <a class="green-category" href="{{ include.item.url | relative_url }}">{{ include.item.category | escape }}</a>
 </article>

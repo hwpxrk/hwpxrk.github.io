@@ -1,0 +1,4 @@
+{%- assign green_pages = site.pages | where_exp: 'item', 'item.green_key' | sort: 'green_order' -%}
+{%- assign green_stories = green_pages | where: 'green_home', true -%}
+{%- assign green_slides = green_pages | where_exp: 'item', 'item.green_hero_order' | sort: 'green_hero_order' -%}
+{%- assign green_writers = green_pages | where_exp: 'item', 'item.writer' -%}
