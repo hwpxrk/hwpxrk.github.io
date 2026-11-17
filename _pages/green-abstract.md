@@ -1,6 +1,9 @@
 ---
 title: '초록을 소개합니다.'
-description: '초록에 함께하는 여러분을 진심으로 환영합니다.'
+description: '여러분을 초록에 초대합니다.'
+
+date: 2026-11-19
+author: '초록'
 
 layout: green-article
 permalink: '/abstract/'

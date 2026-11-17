@@ -1,6 +1,8 @@
 items:
     - key: abstract
-      title: '초록'
+      title: '초록을 소개합니다.'
+      date: '2026-11-18'
+      author: '초록'
       description: '우리만의 초록을 정의하는 그 순간의 중심에 서있는 학생회'
       url: '/abstract/'
       category: '소개'
@@ -8,6 +10,8 @@ items:
       artwork: abstract
     - key: introduction
       title: '후보자'
+      date: '2026-11-18'
+      author: '초록'
       description: '박현욱·송선빈·조연정, 초록의 다음 챕터를 함께 열겠습니다.'
       url: '/introduction/'
       category: '사람'
@@ -15,6 +19,8 @@ items:
       artwork: introduction
     - key: statement
       title: '출마의 변'
+      date: '2026-11-18'
+      author: '초록'
       description: '당신의 모든 계절이 초록으로 기억되기를 바라며,'
       url: '/statement/'
       category: '이야기'
@@ -22,6 +28,8 @@ items:
       artwork: statement
     - key: dreams
       title: '공약'
+      date: '2026-11-18'
+      author: '초록'
       description: '소통, 복지, 교육, 투명. 학우 여러분과 함께 만들어 갈 초록의 20가지 약속을 소개합니다.'
       url: '/dreams/'
       category: '약속'
@@ -29,11 +37,30 @@ items:
       artwork: dreams
     - key: writers
       title: '필진'
+      date: '2026-11-18'
+      author: '초록'
       description: '학부의 오늘을 기록하고, 다음 사람에게 전할 문장을 함께 씁니다.'
       url: '/writers/'
       category: '사람'
       kicker: 'GREEN WRITERS'
       artwork: writers
+
+writers:
+    - role: '정후보'
+      name: '박현욱'
+      major: '산업인공지능전공'
+      message: '한마디 준비 중'
+      url: 'https://instagram.com/hwpxrk_'
+    - role: '부후보'
+      name: '송선빈'
+      major: '산업인공지능전공'
+      message: '한마디 준비 중'
+      url: 'https://instagram.com/s_s_kong_03'
+    - role: '부후보'
+      name: '조연정'
+      major: 'AI융합운영전공'
+      message: '한마디 준비 중'
+      url: 'https://instagram.com/_igotcrushonyou'
 
 candidate_messages:
     - name: '박현욱'
@@ -51,35 +78,34 @@ hero:
       lines:
           - '초록을'
           - '소개합니다.'
-      description: '초록에 함께하는 여러분을 진심으로 환영합니다.'
+      description: '여러분을 초록에 초대합니다.'
       url: '/abstract/'
-      category: '초록 소개'
-      kicker: 'ABOUT GREEN'
+      category: '초록에 대해'
+      kicker: '초록? 초록!'
       artwork: abstract
     - key: statement
       lines:
-          - '당신의 모든 계절이'
-          - '초록으로 기억되기를'
-      description: '당신의 모든 계절이 초록으로 기억되기를 바라며,'
+          - '출마의 변'
+      description: '우리의 모든 계절이 초록으로 기억되기를 바라며,'
       url: '/statement/'
       category: '출마의 변'
-      kicker: 'OUR STORY'
+      kicker: '모두가 초록에 진심'
       artwork: statement
     - key: introduction
       lines:
-          - '초록을 만들어 갈'
-          - '사람들을 만나요'
-      description: '박현욱·송선빈·조연정, 초록의 다음 챕터를 함께 열겠습니다.'
+          - '초록의 필진을'
+          - '소개합니다.'
+      description: '초록의 다양한 필진을 소개합니다.'
       url: '/introduction/'
       category: '후보자'
-      kicker: 'OUR PEOPLE'
+      kicker: '우리는 초록입니다.'
       artwork: introduction
     - key: dreams
       lines:
-          - '우리의 내일을 위한'
-          - '초록의 다음 챕터'
-      description: '소통, 복지, 교육, 투명. 학우 여러분과 함께 만들어 갈 초록의 20가지 약속을 소개합니다.'
+          - '우리가 초록에'
+          - '함께해야 하는 이유'
+      description: '우리가 초록에서 함께 써내려 갈 스무 가지의 약속을 소개합니다.'
       url: '/dreams/'
       category: '공약'
-      kicker: 'NEXT CHAPTER'
+      kicker: '초록의 공약'
       artwork: dreams

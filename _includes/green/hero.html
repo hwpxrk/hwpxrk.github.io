@@ -1,0 +1,20 @@
+<div class="green-artwork-hero green-artwork-{{ include.kind }}" aria-hidden="true">
+    <img class="green-artwork-brand" src="{{ site.logo | relative_url }}" width="49" height="38" alt="">
+    {% case include.kind %}
+    {% when 'statement' %}
+        <span class="green-poster-title">모두가<br>초록에<br>진심</span>
+        <div class="green-poster-flower green-artwork-background"><i></i><i></i><i></i><i></i></div>
+    {% when 'introduction' %}
+        <span class="green-poster-title">같이 만드는<br>우리의 다음.</span>
+        <div class="green-poster-people green-artwork-background"><i></i><i></i><i></i></div>
+    {% when 'dreams' %}
+        <span class="green-poster-title">내일을 향한<br>초록의 약속.</span>
+        <span class="green-poster-asterisk green-artwork-background">✳</span>
+    {% when 'writers' %}
+        <span class="green-poster-title">우리의 말이<br>이야기가 될 때.</span>
+        <span class="green-poster-quotes green-artwork-background">“ ”</span>
+    {% else %}
+        <span class="green-poster-title">여러분을<br>초록에 초대합니다.</span>
+        <img class="green-poster-logo green-artwork-background" src="{{ site.logo | relative_url }}" width="260" height="202" alt="">
+    {% endcase %}
+</div>

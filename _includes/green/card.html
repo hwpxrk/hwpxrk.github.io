@@ -1,7 +1,16 @@
 <article class="green-card">
     <a class="green-card-link" href="{{ include.item.url | relative_url }}">
-        <div class="green-card-art">{% include green/artwork.html kind=include.item.artwork %}<span class="green-card-hover">이야기 읽기 {% include green/icon.html name='diagonal' %}</span></div>
-        <div class="green-card-meta"><span>{{ include.item.kicker }}</span><span>초록</span></div>
+        <div class="green-card-art">
+            {% include green/hero.html kind=include.item.artwork %}
+            <div class="green-card-meta">
+                {% if include.item.date %}
+                <time datetime="{{ include.item.date | date: '%Y-%m-%d' }}">{{ include.item.date | date: '%Y.%m.%d' }}</time>
+                {% else %}
+                <span>게시일 준비 중</span>
+                {% endif %}
+                <span>{{ include.item.author | default: '초록' }}</span>
+            </div>
+        </div>
         <h3>{{ include.item.title }}</h3>
         <p>{{ include.item.description }}</p>
     </a>

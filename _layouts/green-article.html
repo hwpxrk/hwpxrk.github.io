@@ -18,7 +18,7 @@ layout: green
 
     <div class="green-article-art" aria-hidden="true">
         {% assign article_artwork = page.green_artwork | default: page.green_key %}
-        {% include green/artwork.html kind=article_artwork %}
+        {% include green/hero.html kind=article_artwork %}
     </div>
 
     <div class="green-article-body">
@@ -58,7 +58,7 @@ layout: green
                 {% if related_count < 3 %}
                     <a class="green-related-card" href="{{ item.url | relative_url }}">
                         <div class="green-related-art" aria-hidden="true">
-                            {% include green/artwork.html kind=item.artwork %}
+                            {% include green/hero.html kind=item.artwork %}
                         </div>
                         <p class="green-eyebrow">{{ item.category | escape }}</p>
                         <h3>{{ item.title | escape }}</h3>

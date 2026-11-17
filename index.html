@@ -1,9 +1,9 @@
 ---
 layout: green
-description: '당신의 모든 계절이 초록으로 기억되기를. 성균관대학교 응용AI융합학부 초록의 이야기.'
+description: '여러분을 초록에 초대합니다.'
 ---
 
-<h1 class="green-sr-only">초록 — 당신의 모든 계절이 초록으로 기억되기를</h1>
+<h1 class="green-sr-only">초록 - 우리의 모든 계절이 초록으로 기억되기를 바라며</h1>
 <section class="green-hero" data-hero data-theme="green" aria-label="초록의 주요 이야기" aria-roledescription="캐러셀" tabindex="0">
     <div class="green-hero-inner">
         {% for slide in site.data.green.hero %}
@@ -14,13 +14,11 @@ description: '당신의 모든 계절이 초록으로 기억되기를. 성균관
                     {% for line in slide.lines %}<span>{{ line }}</span>{% endfor %}
                 </h2>
                 <p class="green-hero-description">{{ slide.description }}</p>
-                <a class="green-text-link" href="{{ slide.url | relative_url }}">{{ slide.category }} 알아보기 {% include green/icon.html name='arrow' %}</a>
             </div>
             {% if slide.key == 'statement' %}
             <div class="green-hero-stack" role="group" aria-label="출마의 변과 후보자의 한마디">
                 <a class="green-stack-card green-stack-cover" href="{{ slide.url | relative_url }}" aria-label="출마의 변 읽기">
-                    {% include green/artwork.html kind=slide.artwork %}
-                    <span class="green-art-link" aria-hidden="true">{% include green/icon.html name='diagonal' %}</span>
+                    {% include green/hero.html kind=slide.artwork %}
                 </a>
                 {% for candidate in site.data.green.candidate_messages %}
                 <a class="green-stack-card green-stack-message" href="{{ candidate.url | relative_url }}">
@@ -33,8 +31,7 @@ description: '당신의 모든 계절이 초록으로 기억되기를. 성균관
             </div>
             {% else %}
             <a class="green-hero-art" href="{{ slide.url | relative_url }}" aria-label="{{ slide.lines | join: ' ' }} 읽기">
-                {% include green/artwork.html kind=slide.artwork %}
-                <span class="green-art-link">{% include green/icon.html name='diagonal' %}</span>
+                {% include green/hero.html kind=slide.artwork %}
             </a>
             {% endif %}
         </div>
@@ -55,15 +52,15 @@ description: '당신의 모든 계절이 초록으로 기억되기를. 성균관
 
 <section class="green-editorial green-shell" id="stories" data-rail aria-labelledby="stories-title">
     <div class="green-section-heading">
-        <p class="green-eyebrow">OUR STORIES</p>
-        <h2 id="stories-title">우리의 이야기,<br><span class="green-underline">초록의 시작</span></h2>
-        <p>초록을 가장 가까이에서<br>만나는 다섯 가지 이야기.</p>
+        <!-- <p class="green-eyebrow">STORIES</p> -->
+        <h2 id="stories-title">초록이 들려주는<br><span class="green-underline">오프 더 레코드</span></h2>
+        <!-- <p>여러분에게 초록을 소개합니다.</p> -->
         <div class="green-rail-controls">
             <button class="green-round-button" type="button" data-rail-prev aria-label="이전 콘텐츠" disabled>{% include green/icon.html name='arrow-left' %}</button>
             <button class="green-round-button" type="button" data-rail-next aria-label="다음 콘텐츠">{% include green/icon.html name='arrow' %}</button>
         </div>
     </div>
-    <div class="green-card-track" tabindex="0" aria-label="초록 콘텐츠 목록">
+    <div class="green-card-track" role="group" aria-label="초록 콘텐츠 목록">
         {% for item in site.data.green.items %}{% include green/card.html item=item %}{% endfor %}
     </div>
 </section>
@@ -71,26 +68,24 @@ description: '당신의 모든 계절이 초록으로 기억되기를. 성균관
 <a class="green-feature-banner" href="{{ '/abstract/' | relative_url }}">
     <div class="green-shell green-feature-inner">
         <div>
-            <p class="green-eyebrow">HELLO, GREEN</p>
-            <h2>우리의 모든 계절에,<br>초록.</h2>
-            <span class="green-text-link">초록을 소개합니다 {% include green/icon.html name='arrow' %}</span>
+            <h2>초록? 초록!<br>여러분께 초록을 소개합니다.</h2>
         </div>
         <div class="green-banner-flower" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-        <span class="green-banner-caption">YOUR SEASON,<br>OUR GREEN.</span>
+        <!-- <span class="green-banner-caption">우리의 모든 계절이<br>초록으로 기억되기를 바라며.</span> -->
     </div>
 </a>
 
 <section class="green-guide green-shell" aria-labelledby="guide-title">
     <div class="green-section-top">
-        <div><p class="green-eyebrow">EXPLORE GREEN</p><h2 id="guide-title">조금 더 <span class="green-underline">가까이</span></h2></div>
-        <p>궁금한 이야기부터 만나보세요.</p>
+        <!-- <div><p class="green-eyebrow">최근 업로드된 게시글</p> -->
+        <h2 id="guide-title">가장 <span class="green-guide-highlight">많이 읽은</span> 이야기</h2>
+        <!-- <p>궁금한 이야기부터 만나보세요.</p> -->
     </div>
     <div class="green-guide-grid">
-        {% for item in site.data.green.items limit: 4 %}
+        {% for item in site.data.green.items limit: 6 %}
         <a class="green-guide-item" href="{{ item.url | relative_url }}">
-            <div class="green-guide-art">{% include green/artwork.html kind=item.artwork %}</div>
-            <div class="green-guide-copy"><span class="green-guide-number">0{{ forloop.index }}</span><h3>{{ item.title }}</h3><p>{{ item.description }}</p></div>
-            {% include green/icon.html name='diagonal' %}
+            <div class="green-guide-art">{% include green/hero.html kind=item.artwork %}</div>
+            <div class="green-guide-copy"><span class="green-guide-number">{{ forloop.index }}</span><h3>{{ item.title }}</h3><p>{{ item.description }}</p></div>
         </a>
         {% endfor %}
     </div>
@@ -98,17 +93,19 @@ description: '당신의 모든 계절이 초록으로 기억되기를. 성균관
 
 <section class="green-people green-shell" aria-labelledby="people-title">
     <div class="green-section-top">
-        <div><p class="green-eyebrow">PEOPLE OF GREEN</p><h2 id="people-title">초록을 만드는 <span class="green-underline">사람들</span></h2></div>
-        <a class="green-text-link" href="{{ '/introduction/' | relative_url }}">후보자 만나기 {% include green/icon.html name='arrow' %}</a>
+        <!-- <div><p class="green-eyebrow">PEOPLE OF GREEN</p> -->
+        <h2 id="people-title">초록의<br> <span class="green-people-highlight">다양한 필진</span> 만나기</h2>
+        <!-- <a class="green-text-link" href="{{ '/introduction/' | relative_url }}">후보자 만나기 {% include green/icon.html name='arrow' %}</a> -->
     </div>
     <div class="green-people-list">
-        {% for person in site.author.links %}
+        {% for person in site.data.green.writers %}
         <a class="green-person" href="{{ person.url }}" target="_blank" rel="noopener noreferrer">
-            <span class="green-person-number">0{{ forloop.index }}</span><h3>{{ person.label }}</h3>
-            <span class="green-person-description">{{ site.title }}의 이야기를 만나보세요</span>
-            <span class="green-person-social">INSTAGRAM {% include green/icon.html name='diagonal' %}</span><span class="green-sr-only">(새 창)</span>
+            <span class="green-person-role">{{ person.role }}</span>
+            <h3>{{ person.name }}<span class="green-sr-only"> 인스타그램 (새 창)</span></h3>
+            <span class="green-person-major">{{ person.major }}</span>
+            <span class="green-person-message">{{ person.message }}</span>
         </a>
         {% endfor %}
     </div>
-    <a class="green-more-link" href="{{ '/writers/' | relative_url }}">초록의 필진 알아보기 {% include green/icon.html name='arrow' %}</a>
+    <a class="green-more-link" href="{{ '/writers/' | relative_url }}">더 보기 {% include green/icon.html name='arrow' %}</a>
 </section>

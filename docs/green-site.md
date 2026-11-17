@@ -9,7 +9,7 @@
 - `_layouts/green-article.html`: 소개, 후보자, 출마의 변, 공약, 필진의 공통 본문 레이아웃.
 - `_data/green.yml`: 홈페이지 이야기 목록과 대표 슬라이드. 제목·설명·링크·분류·그림 키를 관리합니다. 대표 슬라이드는 초록 소개, 출마의 변, 후보자, 공약 순서이며 개수 표시는 목록 길이에 맞춰 자동으로 갱신됩니다.
 - `_pages/green-*.md`: 실제 Markdown 본문과 페이지 메타데이터.
-- `_includes/green/artwork.html`: 본문과 카드에 공통으로 사용하는 그림.
+- `_includes/green/hero.html`: 대표 게시글, 카드 썸네일, 본문 표지에 공통으로 사용하는 로고·제목·배경. `kind`로 종류만 지정하며, 표시 크기는 CSS에서 조절합니다.
 - `assets/css/green.scss`: 데스크톱·태블릿·모바일 공통 스타일 원본. Jekyll 빌드 결과와 페이지에서 불러오는 경로는 기존 `assets/css/green.css`를 유지합니다.
 - `assets/js/green/main.js`: 검색, 대화상자, 슬라이드, 콘텐츠 레일, 상단 이동.
 - `assets/src/green/`: 기존 초록 로고와 favicon.

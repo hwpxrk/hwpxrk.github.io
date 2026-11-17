@@ -51,6 +51,48 @@
         }
     });
 
+    const footer = document.querySelector('.green-footer');
+    const main = document.querySelector('#main');
+
+    if (footer && main) {
+        function update_footer_reveal() {
+            const viewport_height = window.visualViewport?.height || window.innerHeight;
+            const footer_height = footer.getBoundingClientRect().height;
+            const header_height = header?.getBoundingClientRect().height || 0;
+            const main_bottom = main.getBoundingClientRect().bottom + window.scrollY;
+            const can_reveal = !reduced_motion.matches && footer_height + header_height < viewport_height &&
+                main_bottom >= viewport_height;
+
+            footer.classList.toggle('is-reveal-enabled', can_reveal);
+        }
+
+        const footer_observer = new ResizeObserver(update_footer_reveal);
+
+        for (const element of [footer, main, header, announcement]) {
+            if (element) {
+                footer_observer.observe(element);
+            }
+        }
+
+        window.addEventListener('resize', update_footer_reveal);
+        window.visualViewport?.addEventListener('resize', update_footer_reveal);
+        reduced_motion.addEventListener('change', update_footer_reveal);
+
+        footer.addEventListener('focusin', (event) => {
+            if (!footer.classList.contains('is-reveal-enabled')) {
+                return;
+            }
+
+            const target_top = event.target.getBoundingClientRect().top;
+
+            if (main.getBoundingClientRect().bottom > target_top) {
+                window.scrollTo({top: document.documentElement.scrollHeight - window.innerHeight, behavior: 'instant'});
+            }
+        });
+
+        update_footer_reveal();
+    }
+
     function open_dialog(dialog, trigger) {
         if (!dialog || dialog.open) {
             return;
@@ -463,33 +505,110 @@
             continue;
         }
 
+        const cards = Array.from(track.children);
+        const mobile_rail = window.matchMedia('(width < 48rem)');
+        const edge_tolerance = 2;
+        let rail_positions = [0];
+        let rail_index = 0;
+
         function update_rail() {
             if (previous) {
-                previous.disabled = track.scrollLeft <= 2;
+                previous.disabled = rail_index === 0;
             }
 
             if (next) {
-                next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+                next.disabled = rail_index === rail_positions.length - 1;
+            }
+
+            const track_bounds = track.getBoundingClientRect();
+
+            for (const card of cards) {
+                const card_bounds = card.getBoundingClientRect();
+                const fully_visible = card_bounds.left >= track_bounds.left - edge_tolerance &&
+                    card_bounds.right <= track_bounds.right + edge_tolerance;
+
+                card.inert = !mobile_rail.matches &&
+                    (card_bounds.right <= track_bounds.left || card_bounds.left >= track_bounds.right);
+
+                // Mobile uses native scrolling; desktop Tab follows the fully revealed cards.
+                for (const link of card.querySelectorAll('a')) {
+                    if (mobile_rail.matches || fully_visible) {
+                        link.removeAttribute('tabindex');
+                    } else {
+                        link.tabIndex = -1;
+                    }
+                }
             }
         }
 
-        function scroll_rail(direction) {
-            const card = track.firstElementChild;
-            const next_card = card?.nextElementSibling;
-            const card_width = card?.getBoundingClientRect().width || track.clientWidth;
-            const step = next_card ? next_card.offsetLeft - card.offsetLeft : card_width;
+        function measure_rail() {
+            const current_left = track.scrollLeft;
+            const was_at_end = rail_positions.length > 1 && rail_index === rail_positions.length - 1;
+            const track_left = track.getBoundingClientRect().left;
+            const card_bounds = cards.map((card) => {
+                const bounds = card.getBoundingClientRect();
 
-            track.scrollBy({left: step * direction, behavior: reduced_motion.matches ? 'instant' : 'smooth'});
+                return {left: bounds.left - track_left + current_left, right: bounds.right - track_left + current_left};
+            });
+            const first_left = card_bounds[0]?.left || 0;
+            const maximum = Math.max(0, track.scrollWidth - track.clientWidth);
+            const positions = [0];
+
+            for (const bounds of card_bounds) {
+                const position = Math.min(maximum, Math.max(0, bounds.left - first_left));
+
+                if (position - positions.at(-1) > edge_tolerance) {
+                    positions.push(position);
+                }
+            }
+
+            if (maximum - positions.at(-1) > edge_tolerance) {
+                positions.push(maximum);
+            } else if (positions.length > 1) {
+                positions[positions.length - 1] = maximum;
+            }
+
+            rail_positions = positions;
+            rail_index = was_at_end ? positions.length - 1 : Math.min(rail_index, positions.length - 1);
+
+            if (mobile_rail.matches) {
+                track.tabIndex = 0;
+            } else {
+                track.removeAttribute('tabindex');
+            }
+
+            track.scrollTo({left: rail_positions[rail_index], behavior: 'instant'});
+            update_rail();
+        }
+
+        function scroll_rail(direction) {
+            rail_index = Math.max(0, Math.min(rail_positions.length - 1, rail_index + direction));
+            update_rail();
+            track.scrollTo({left: rail_positions[rail_index], behavior: reduced_motion.matches ? 'instant' : 'smooth'});
         }
 
         previous?.addEventListener('click', () => scroll_rail(-1));
         next?.addEventListener('click', () => scroll_rail(1));
-        track.addEventListener('scroll', update_rail, {passive: true});
+        track.addEventListener('scroll', () => {
+            if (mobile_rail.matches) {
+                rail_index = rail_positions.reduce((nearest_index, position, index) =>
+                    Math.abs(position - track.scrollLeft) < Math.abs(rail_positions[nearest_index] - track.scrollLeft) ?
+                        index : nearest_index, 0);
+            }
 
-        const rail_observer = new ResizeObserver(update_rail);
+            update_rail();
+        }, {passive: true});
+        mobile_rail.addEventListener('change', measure_rail);
+
+        const rail_observer = new ResizeObserver(measure_rail);
 
         rail_observer.observe(track);
-        update_rail();
+
+        for (const card of cards) {
+            rail_observer.observe(card);
+        }
+
+        measure_rail();
     }
 
     for (const share_button of document.querySelectorAll('[data-share]')) {

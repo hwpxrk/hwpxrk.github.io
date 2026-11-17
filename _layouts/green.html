@@ -22,7 +22,7 @@
     <body class="green-site{% if page.url == '/' %} green-home{% endif %}">
         <a class="green-skip-link" href="#main">본문 바로가기</a>
         <div class="green-announcement" data-announcement>
-            <a href="{{ '/statement/' | relative_url }}">당신의 모든 계절이 초록으로 기억되기를 바라며<span aria-hidden="true">↗</span></a>
+            <a href="{{ '/statement/' | relative_url }}">당신의 모든 계절이 초록으로 기억되기를 바라며<span aria-hidden="true"></span></a>
             <button type="button" data-banner-close aria-label="상단 알림 닫기">{% include green/icon.html name='close' %}</button>
         </div>
         <header class="green-header">
@@ -38,9 +38,21 @@
         <noscript><nav class="green-noscript-nav" aria-label="주 메뉴">{% for link in site.data.navigation.main %}<a href="{{ link.url | relative_url }}">{{ link.title }}</a>{% endfor %}</nav></noscript>
         <main id="main">{{ content }}</main>
         <footer class="green-footer">
-            <div class="green-footer-top"><p>성균관대학교<br>{{ site.description }}</p><nav aria-label="하단 메뉴">{% for link in site.data.navigation.main %}<a href="{{ link.url | relative_url }}">{{ link.title }}</a>{% endfor %}</nav></div>
-            <a class="green-footer-wordmark" href="{{ '/' | relative_url }}" aria-label="초록 홈">GREEN<span>↗</span></a>
-            <div class="green-footer-bottom"><span>우리의 모든 계절에, 초록.</span><span>© {{ site.time | date: '%Y' }} {{ site.title }}.</span></div>
+            <div class="green-footer-top">
+                <nav aria-label="후보자 인스타그램">
+                    {% for link in site.footer.links %}
+                    <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">{{ link.label }} INSTAGRAM<span class="green-sr-only"> (새 창)</span></a>
+                    {% endfor %}
+                </nav>
+                <nav aria-label="하단 메뉴">
+                    {% for link in site.data.navigation.main %}<a href="{{ link.url | relative_url }}">{{ link.title }}</a>{% endfor %}
+                </nav>
+                <p>© 제4대 응용AI융합학부 학생회장단<br>선거운동본부 초록</p>
+            </div>
+            <a class="green-footer-wordmark" href="{{ '/' | relative_url }}" aria-label="초록 홈">
+                <img src="{{ '/assets/src/green/logo/wordmark.svg' | relative_url }}" width="5968" height="1488" alt="">
+                <span aria-hidden="true">↗</span>
+            </a>
         </footer>
         <button class="green-back-top green-round-button" type="button" data-back-top aria-label="맨 위로" hidden>{% include green/icon.html name='arrow-up' %}</button>
         {% include green/dialogs.html %}
