@@ -3,7 +3,7 @@ layout: green
 ---
 {% include green/content-data.html %}
 {% assign article_body = content | strip %}
-<article class="green-article">
+<article class="green-article{% if page.pledges %} green-article-with-pledges{% endif %}">
     <nav class="green-breadcrumb" aria-label="현재 위치">
         <a href="{{ '/' | relative_url }}">초록</a>
         <span aria-hidden="true">/</span>
@@ -33,10 +33,6 @@ layout: green
 
     </div>
 
-    {% if page.pledges %}
-        {% include green/pledges.html %}
-    {% endif %}
-
     {% if page.green_key == 'introduction' %}
         {% assign candidate_words = green_pages | where: 'green_parent', page.green_key %}
         <section class="green-candidates" aria-labelledby="green-candidates-title">
@@ -47,6 +43,10 @@ layout: green
         </section>
     {% endif %}
 </article>
+
+{% if page.pledges %}
+    {% include green/pledges.html %}
+{% endif %}
 
 <section class="green-related" aria-labelledby="green-related-title">
     <div class="green-section-heading">
