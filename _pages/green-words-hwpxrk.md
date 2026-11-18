@@ -1,6 +1,6 @@
 ---
-title: '정후보 박현욱의 한마디'
-description: '정후보 박현욱의 이야기를 준비하고 있습니다.'
+title: '정후보 박현욱'
+description: '초록의 정후보 박현욱의 출마 각오를 소개합니다.'
 
 date: 2026-11-18
 author: '박현욱'
@@ -13,8 +13,8 @@ green_parent: introduction
 green_kicker: '초록의 한마디'
 green_artwork: introduction
 green_cover_lines:
-    - '정후보 박현욱의'
-    - '한마디'
+    - '정후보 박현욱'
+    - '출마 각오'
 editorial_status: placeholder
 
 category: '후보자의 한마디'

@@ -13,8 +13,10 @@
 - `_includes/green/hero.html`: 대표 게시글, 카드 썸네일, 본문 표지에 공통으로 사용하는 로고·포스터 문구·배경. 전달받은 페이지의 `green_artwork`, `green_key`, `green_cover_lines`를 사용하며, 표시 크기는 CSS에서 조절합니다.
 - `_includes/green/card.html`: 홈페이지 콘텐츠 카드. 같은 페이지의 제목·설명·분류와 이미지 위 날짜·작성자를 표시합니다.
 - `_includes/green/person-list.html`: 홈페이지 필진 목록. `green_writers`의 직책·이름·전공을 3열로 표시하고 각 행을 Instagram에 연결합니다.
+- `_includes/green/pledges.html`: 공약 페이지의 분야 필터·결과 개수·펼쳐 읽는 공약 카드. 공통 본문 레이아웃의 `.green-article-body` 밖에 배치합니다.
 - `assets/css/green.scss`: 데스크톱·태블릿·모바일 공통 스타일 원본. Jekyll 빌드 결과와 페이지에서 불러오는 경로는 기존 `assets/css/green.css`를 유지합니다.
 - `assets/js/green/main.js`: 검색, 대화상자, 슬라이드, 콘텐츠 레일, 상단 이동.
+- `assets/js/green/pledges.js`: 공약 분야 필터와 결과 개수 갱신. `pledges` 데이터가 있는 공약 페이지에서만 불러옵니다.
 - `assets/src/green/`: 기존 초록 로고와 favicon.
 - `_data/navigation.yml`: 사용자가 작성한 다섯 개 메뉴의 짧은 이름과 주소. 게시글 제목과 별도로 관리합니다.
 
@@ -40,7 +42,7 @@
 | 공약 | `_pages/green-dreams.md` | `/dreams/` |
 | 필진 | `_pages/green-writers.md` | `/writers/` |
 
-각 파일의 front matter 아래 Markdown이 본문으로 표시됩니다. 2026-11-14에는 사용자가 제공한 학생회 폴더의 자료를 바탕으로 다섯 페이지에 초안을 입력했습니다. 페이지의 `editorial_status: draft`는 편집 상태를 나타내며 화면에는 별도 배지로 표시하지 않습니다. 원본 출처, 공약 20개 항목의 대응표, 문서 간 차이는 [콘텐츠 출처 기록](green-content-sources.md)을 참고합니다. 본문이 비어 있거나 `TEST`만 있는 페이지에는 준비 중 안내를 표시합니다. 콘텐츠 정보를 front matter로 통합하면서 기존 초안 본문은 변경하지 않았습니다.
+각 파일의 front matter 아래 Markdown이 본문으로 표시됩니다. 공약 페이지는 소개 두 문단을 Markdown 본문에 두고, 20개 공약의 요약·상세 문단은 같은 파일의 front matter에서 관리합니다. 2026-11-14에는 사용자가 제공한 학생회 폴더의 자료를 바탕으로 다섯 페이지에 초안을 입력했습니다. 페이지의 `editorial_status: draft`는 편집 상태를 나타내며 화면에는 별도 배지로 표시하지 않습니다. 원본 출처, 공약 20개 항목의 대응표, 문서 간 차이는 [콘텐츠 출처 기록](green-content-sources.md)을 참고합니다. 본문이 비어 있거나 `TEST`만 있는 페이지에는 준비 중 안내를 표시합니다. 공통 콘텐츠 정보를 front matter로 통합했던 작업에서는 기존 초안 본문을 변경하지 않았습니다.
 
 ### 공통 정보 편집
 
@@ -91,6 +93,32 @@ tag: '초록'
 
 메뉴에서 보이는 `초록`, `후보자` 같은 짧은 이름은 `_data/navigation.yml`에 남겨 둡니다. 게시글 제목을 바꾸어도 메뉴 이름은 유지됩니다. 페이지 주소를 바꿀 때는 메뉴 항목이나 Markdown 본문에 직접 작성한 링크도 함께 확인합니다.
 
+### 공약 카드와 분야 필터
+
+공약은 `_pages/green-dreams.md`의 `pledge_categories`와 `pledges` 배열에서 편집합니다. 기존 페이지 제목·설명·대표 표지 설정과 소개 두 문단은 유지하며, `_data/green.yml`에 별도 공약 데이터를 추가하지 않습니다.
+
+`pledge_categories`는 `key`와 화면에 표시할 `label`을 갖습니다. 현재 `communication`(소통) 5개, `welfare`(복지) 8개, `education`(교육) 4개, `transparency`(투명) 3개로 총 20개입니다. `pledges`의 배열 순서가 카드 순서이며 각 항목은 다음 값을 사용합니다.
+
+| 항목 | 편집 내용 |
+| --- | --- |
+| `id` | `communication-1`처럼 항목마다 고유한 식별자. 카드·팝업·제목의 HTML ID 연결에 사용합니다. |
+| `category` | `pledge_categories`의 `key`와 일치하는 분야. 필터와 카드의 첫 번째 태그에 사용합니다. |
+| `title` | 카드와 팝업에 공통으로 표시하는 공약 제목. |
+| `summary` | 카드의 제목 아래 표시할 짧은 요약. |
+| `keywords` | 분야 태그 뒤에 표시할 관련 키워드 1~2개. 예: `['간담회', '건의사항']`. |
+| `detail` | 팝업에 표시할 Markdown 상세 원고. PDF 본문과 조건을 담은 각주를 사용합니다. |
+| `source_page` | 정책자료집 RevI PDF의 1부터 시작하는 쪽수. 원고를 대조할 때 사용하는 편집 근거입니다. |
+
+상세 원고는 YAML의 `detail: |` 아래에 들여 쓰고, 문단 사이에는 빈 줄을 둡니다. PDF의 문장은 유지하고 지면의 강제 줄바꿈만 웹 문단으로 정돈합니다. 문구를 바꾸려면 해당 공약의 `detail` 한 곳을 수정하면 됩니다.
+
+데스크톱에서는 왼쪽에 `전체 보기`, `소통`, `복지`, `교육`, `투명` 사각 태그 필터가 세로로 배치되고 스크롤 중에도 따라옵니다. 오른쪽에는 제목·요약·분야 및 키워드 태그 순서의 카드가 2열로 표시됩니다. 회색 태그 중 선택한 분야는 검정 배경과 흰 글씨로 표시하며 `aria-pressed`로 선택 상태를 전달합니다. 모바일에서는 필터가 카드 위의 가로 줄로 이동하고 카드는 1열이 됩니다.
+
+카드 전체를 누르면 해당 공약의 HTML `dialog` 팝업이 열립니다. 팝업 내부만 스크롤되며 위쪽의 닫기 버튼은 계속 보입니다. 닫기 버튼, Escape, 팝업 바깥 클릭으로 닫을 수 있고 원래 카드로 키보드 포커스가 돌아갑니다. 필터 변경 시 분야에 맞는 카드와 결과 개수를 표시합니다.
+
+마크업은 `_includes/green/pledges.html`, 배치·색상은 `assets/css/green.scss`의 `.green-pledges` 이하, 필터·팝업 동작은 `assets/js/green/pledges.js`에서 수정합니다. 공약 영역은 일반 본문 스타일의 영향을 받지 않도록 `.green-article-body` 밖에서 불러옵니다. 필터와 팝업은 JavaScript로 동작합니다. 사이트 검색에는 각 공약의 `title`, `summary`, `keywords`, `detail`도 포함합니다.
+
+원고는 RevI 8~27쪽을 기준으로 관리합니다. 동아리 지원금 인상액 미확정, 축하 키트 구매·수요조사, 라운지 예약제 검토, 교육과정·라이선스 건의와 요청 등 조건은 짧은 요약과 상세를 수정할 때도 유지합니다.
+
 ### 후보자 소개 카드와 한마디
 
 홈페이지의 후보자 소개 대표 영역에는 네 개의 형제 링크 카드가 겹쳐 있습니다. 앞 표지는 `/introduction/`으로 연결되고, 뒤쪽 카드는 다음 순서로 연결됩니다.
@@ -117,7 +145,7 @@ green_artwork: introduction
 
 한마디 세 페이지에는 `green_home`과 `green_hero_order`를 지정하지 않습니다. 따라서 독립된 대표 슬라이드나 홈페이지 콘텐츠 카드로 추가되지 않으며, 대표 글 4개·홈페이지 카드 5개를 유지하고 검색 대상에는 세 한마디를 더해 총 8개 페이지를 포함합니다. 본문은 확정 원고를 넣기 전까지 준비 중 안내를 표시합니다.
 
-후보자 소개 원본 Markdown의 사진·연혁·직접 작성한 소감은 소개 페이지에서 관리합니다. 그 본문 하단에 별도 후보자 명단을 추가하지 않습니다. 필진과 SNS 정보는 아래의 `writers` 배열에서 계속 관리하며, 한마디 페이지에 중복 작성하지 않습니다.
+후보자 소개 원본 Markdown의 사진·연혁·직접 작성한 소감은 소개 페이지에서 관리합니다. 본문 아래에는 `후보자의 출마 각오 알아보기` 목록을 표시합니다. 제목의 `출마 각오`는 밑줄 없이 초록색으로 강조하고, 메인 필진 목록과 같은 직책·이름·전공 3열 및 hover 색상을 사용합니다. 각 행은 해당 후보의 출마 각오 페이지를 같은 창에서 엽니다. 필진과 SNS 정보는 아래의 `writers` 배열에서 계속 관리하며, 한마디 페이지에 중복 작성하지 않습니다.
 
 ### 필진 정보
 
@@ -129,19 +157,24 @@ writers:
       role: '정후보'
       major: '산업인공지능전공'
       instagram: 'https://instagram.com/hwpxrk_'
+      words_key: hwpxrk
     - name: '송선빈'
       role: '부후보'
       major: '산업인공지능전공'
       instagram: 'https://instagram.com/s_s_kong_03'
+      words_key: sunbin1391
     - name: '조연정'
       role: '부후보'
       major: 'AI융합운영전공'
       instagram: 'https://instagram.com/_igotcrushonyou'
+      words_key: yyjj33
 ```
 
-`_includes/green/content-data.html`이 이 배열을 `green_writers`로 전달하고, 홈페이지의 `_includes/green/person-list.html`과 푸터가 같은 정보를 사용합니다. 홈페이지 필진 행은 PC와 모바일 모두 직책·이름·전공 3열이며 Instagram으로 연결됩니다. 이름과 SNS 주소를 바꿀 때는 이 배열만 수정하고 실제 확인된 정보를 입력합니다.
+`_includes/green/content-data.html`이 이 배열을 `green_writers`로 전달하고, 홈페이지와 후보자 소개의 `_includes/green/person-list.html`, 푸터가 같은 정보를 사용합니다. 홈페이지 필진 행은 PC와 모바일 모두 직책·이름·전공 3열이며 Instagram으로 연결됩니다. 이름과 SNS 주소를 바꿀 때는 이 배열만 수정하고 실제 확인된 정보를 입력합니다.
 
-출마의 변은 `_pages/green-statement.md`에서 공동 원고 하나로 관리합니다. 후보자 소개 페이지는 기존 소개 본문을 표시하며 하단에 별도 필진 목록을 덧붙이지 않습니다.
+`words_key`는 각 출마 각오 페이지의 `green_key`와 연결됩니다. 후보자 소개에서는 `green_parent: introduction`인 페이지를 `word_pages`로 공통 목록에 전달하고, `words_key`에 해당하는 글이 있는 사람만 표시합니다. 링크 주소는 해당 글의 `permalink`를 따르므로 여기에 URL을 중복 작성할 필요가 없습니다. 한마디 문구나 준비 중 칸은 표시하지 않습니다.
+
+출마의 변은 `_pages/green-statement.md`에서 공동 원고 하나로 관리합니다. 후보자 소개 하단의 출마 각오 목록은 `_layouts/green-article.html`에 있으며, 본문 스타일이 목록에 덮이지 않도록 `.green-article-body` 밖에 배치합니다.
 
 ### 새 글 추가
 

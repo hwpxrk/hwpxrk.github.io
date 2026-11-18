@@ -1,8 +1,12 @@
 <div class="green-people-list">
     {% for person in include.people %}
-    <a class="green-person" href="{{ person.instagram | escape }}" target="_blank" rel="noopener noreferrer">
+    {% if include.word_pages %}
+        {% assign word_page = include.word_pages | where: 'green_key', person.words_key | first %}
+        {% unless word_page %}{% continue %}{% endunless %}
+    {% endif %}
+    <a class="green-person" href="{% if include.word_pages %}{{ word_page.url | relative_url }}{% else %}{{ person.instagram | escape }}{% endif %}"{% unless include.word_pages %} target="_blank" rel="noopener noreferrer"{% endunless %}>
         <span class="green-person-role">{{ person.role | escape }}</span>
-        <h3>{{ person.name | escape }}<span class="green-sr-only"> 인스타그램 (새 창)</span></h3>
+        <h3>{{ person.name | escape }}<span class="green-sr-only">{% if include.word_pages %} 출마 각오 읽기{% else %} 인스타그램 (새 창){% endif %}</span></h3>
         <span class="green-person-major">{{ person.major | escape }}</span>
     </a>
     {% endfor %}

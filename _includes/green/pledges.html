@@ -1,0 +1,48 @@
+<section class="green-pledges" data-pledges aria-labelledby="green-pledges-title">
+    <h2 id="green-pledges-title" class="green-sr-only">초록의 공약 모아보기</h2>
+    <div class="green-pledge-filters" data-pledge-filters role="group" aria-label="공약 분야 선택" hidden>
+        <button type="button" class="green-pledge-filter" data-pledge-filter="all" aria-pressed="true" aria-controls="green-pledge-grid">전체 보기</button>
+        {% for category in page.pledge_categories %}
+        <button type="button" class="green-pledge-filter" data-pledge-filter="{{ category.key | escape }}" aria-pressed="false" aria-controls="green-pledge-grid">{{ category.label | escape }}</button>
+        {% endfor %}
+    </div>
+    <div class="green-pledge-results">
+        <p class="green-pledge-count" data-pledge-count role="status" aria-live="polite" aria-atomic="true">전체 공약 {{ page.pledges.size }}개</p>
+        <div class="green-pledge-grid" id="green-pledge-grid">
+            {% for pledge in page.pledges %}
+            {% assign pledge_category = page.pledge_categories | where: 'key', pledge.category | first %}
+            <article class="green-pledge-card" id="pledge-{{ pledge.id | escape }}" data-pledge data-category="{{ pledge.category | escape }}">
+                <h3 class="green-pledge-title">
+                    <button class="green-pledge-link" type="button" data-pledge-open aria-haspopup="dialog" aria-controls="pledge-detail-{{ pledge.id | escape }}">{{ pledge.title | escape }}</button>
+                </h3>
+                <p class="green-pledge-description">{{ pledge.summary | escape }}</p>
+                <div class="green-pledge-tags" aria-label="관련 태그">
+                    <span class="green-category">{{ pledge_category.label | escape }}</span>
+                    {% for keyword in pledge.keywords %}<span class="green-category">{{ keyword | escape }}</span>{% endfor %}
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+    {% for pledge in page.pledges %}
+    {% assign pledge_category = page.pledge_categories | where: 'key', pledge.category | first %}
+    <dialog class="green-pledge-dialog" id="pledge-detail-{{ pledge.id | escape }}" data-pledge-dialog aria-labelledby="pledge-title-{{ pledge.id | escape }}">
+        <div class="green-pledge-dialog-toolbar">
+            <span>초록의 약속 · {{ pledge_category.label | escape }}</span>
+            <button class="green-pledge-close" type="button" data-pledge-close autofocus>닫기 {% include green/icon.html name='close' %}</button>
+        </div>
+        <div class="green-pledge-dialog-content">
+            <header class="green-pledge-dialog-heading">
+                <h2 id="pledge-title-{{ pledge.id | escape }}">{{ pledge.title | escape }}</h2>
+                <div class="green-pledge-tags" aria-label="관련 태그">
+                    <span class="green-category">{{ pledge_category.label | escape }}</span>
+                    {% for keyword in pledge.keywords %}<span class="green-category">{{ keyword | escape }}</span>{% endfor %}
+                </div>
+            </header>
+            <div class="green-pledge-detail">
+                {{ pledge.detail | markdownify }}
+            </div>
+        </div>
+    </dialog>
+    {% endfor %}
+</section>

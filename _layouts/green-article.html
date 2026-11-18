@@ -33,6 +33,19 @@ layout: green
 
     </div>
 
+    {% if page.pledges %}
+        {% include green/pledges.html %}
+    {% endif %}
+
+    {% if page.green_key == 'introduction' %}
+        {% assign candidate_words = green_pages | where: 'green_parent', page.green_key %}
+        <section class="green-candidates" aria-labelledby="green-candidates-title">
+            <div class="green-section-top">
+                <h2 id="green-candidates-title">후보자의 <span class="green-people-highlight">출마 각오</span> 알아보기</h2>
+            </div>
+            {% include green/person-list.html people=green_writers word_pages=candidate_words %}
+        </section>
+    {% endif %}
 </article>
 
 <section class="green-related" aria-labelledby="green-related-title">

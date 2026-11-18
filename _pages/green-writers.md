@@ -21,14 +21,17 @@ writers:
       role: '정후보'
       major: '산업인공지능전공'
       instagram: 'https://instagram.com/hwpxrk_'
+      words_key: hwpxrk
     - name: '송선빈'
       role: '부후보'
       major: '산업인공지능전공'
       instagram: 'https://instagram.com/s_s_kong_03'
+      words_key: sunbin1391
     - name: '조연정'
       role: '부후보'
       major: 'AI융합운영전공'
       instagram: 'https://instagram.com/_igotcrushonyou'
+      words_key: yyjj33
 
 category: '초록'
 tag: '초록'

@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
         <link rel="stylesheet" href="{{ '/assets/css/green.css' | relative_url }}">
         <script src="{{ '/assets/js/green/main.js' | relative_url }}" defer></script>
+        {% if page.pledges %}<script src="{{ '/assets/js/green/pledges.js' | relative_url }}" defer></script>{% endif %}
     </head>
     <body class="green-site{% if page.url == '/' %} green-home{% endif %}">
         <a class="green-skip-link" href="#main">본문 바로가기</a>
@@ -58,7 +59,15 @@
         <button class="green-back-top green-round-button" type="button" data-back-top aria-label="맨 위로" hidden>{% include green/icon.html name='arrow-up' %}</button>
         {% include green/dialogs.html %}
         {% capture search_json %}
-            [{% for green_page in green_pages %}{"title": {{ green_page.title | jsonify }}, "description": {{ green_page.description | jsonify }}, "content": {{ green_page.content | markdownify | strip_html | replace: 'TEST', '' | jsonify }}, "category": {{ green_page.category | jsonify }}, "url": {{ green_page.url | relative_url | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]
+            [{% for green_page in green_pages %}
+                {%- capture search_content -%}
+                    {{- green_page.content | markdownify | strip_html | replace: 'TEST', '' -}}
+                    {%- for pledge in green_page.pledges %}
+                        {{ pledge.title }} {{ pledge.summary }} {{ pledge.keywords | join: ' ' }} {{ pledge.detail | markdownify | strip_html }}
+                    {% endfor -%}
+                {%- endcapture -%}
+                {"title": {{ green_page.title | jsonify }}, "description": {{ green_page.description | jsonify }}, "content": {{ search_content | jsonify }}, "category": {{ green_page.category | jsonify }}, "url": {{ green_page.url | relative_url | jsonify }}}{% unless forloop.last %},{% endunless %}
+            {% endfor %}]
         {% endcapture %}
         <script id="green-search-data" type="application/json">{{ search_json | replace: '<', '\u003c' }}</script>
     </body>

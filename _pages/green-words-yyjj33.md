@@ -1,6 +1,6 @@
 ---
-title: '부후보 조연정의 한마디'
-description: '부후보 조연정의 이야기를 준비하고 있습니다.'
+title: '부후보 조연정'
+description: '초록의 부후보 조연정의 출마 각오를 소개합니다.'
 
 date: 2026-11-18
 author: '조연정'
@@ -13,8 +13,8 @@ green_parent: introduction
 green_kicker: '초록의 한마디'
 green_artwork: introduction
 green_cover_lines:
-    - '부후보 조연정의'
-    - '한마디'
+    - '부후보 조연정'
+    - '출마 각오'
 editorial_status: placeholder
 
 category: '후보자의 한마디'
