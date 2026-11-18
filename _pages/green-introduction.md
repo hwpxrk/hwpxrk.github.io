@@ -86,14 +86,6 @@ tag: '초록'
     </dl>
 </section>
 
-<p style="text-align: center; margin-bottom: 10rem;">
-    안녕하세요, 초록의 정후보 박현욱입니다.<br>
-    저의 차별점은 <strong>풍부한 경험</strong>이라고 생각합니다.<br>
-    직장 내 TF팀 전환 경험, 기획국원, 부학생회장, 높은 성적 등 다양한 경험을 보유하고 있습니다.<br>
-    완전한 학부로서의 도전과 도약, 그리고 이를 향한 학우 여러분 믿음.<br>
-    그 중심에서 우리만의 초록을 정의하는 데 누구보다 앞장서겠습니다.<br>
-</p>
-
 <section class="green-profile" aria-labelledby="부후보-송선빈">
     <img class="green-profile-portrait" src="{{ '/assets/src/green/candidates/song_seonbin.jpeg' | relative_url }}" width="1740" height="2460" alt="송선빈 후보 증명사진" loading="lazy" decoding="async">
     <header class="green-profile-header">
@@ -123,13 +115,6 @@ tag: '초록'
         </dd>
     </dl>
 </section>
-
-<p style="text-align: center; margin-bottom: 10rem;">
-    안녕하세요, 초록의 부후보 송선빈입니다.<br>
-    초록이 약속하는 학생회는 단순합니다. 투명하고, 빠릿하게.<br>
-    숨기지 않고, 미루지 않겠습니다.<br>
-    말보다 행동으로 보여드리겠습니다.<br>
-</p>
 
 <section class="green-profile" aria-labelledby="부후보-조연정">
     <img class="green-profile-portrait" src="{{ '/assets/src/green/candidates/jo_yeonjeong.jpeg' | relative_url }}" width="354" height="472" alt="조연정 후보 증명사진" loading="lazy" decoding="async">
@@ -172,11 +157,6 @@ tag: '초록'
         </dd>
     </dl>
 </section>
-
-<p style="text-align: center; margin-bottom: 10rem;">
-    안녕하세요, 초록의 부후보 조연정입니다.<br>
-    초록은 기대하던 것 그 이상을 해냅니다.<br>
-</p>
 
 초록에 대해 더 알아보세요!
 
