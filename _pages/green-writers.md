@@ -2,7 +2,7 @@
 title: '초록의 필진을 소개합니다.'
 description: '초록과 함께하는 다양한 필진을 소개합니다.'
 
-date: '2026-11-18'
+date: 2026-11-19
 author: '초록'
 
 layout: green-article
@@ -15,6 +15,20 @@ green_cover_lines:
     - '초록의 필진을'
     - '소개합니다.'
 editorial_status: draft
+
+writers:
+    - name: '박현욱'
+      role: '정후보'
+      major: '산업인공지능전공'
+      instagram: 'https://instagram.com/hwpxrk_'
+    - name: '송선빈'
+      role: '부후보'
+      major: '산업인공지능전공'
+      instagram: 'https://instagram.com/s_s_kong_03'
+    - name: '조연정'
+      role: '부후보'
+      major: 'AI융합운영전공'
+      instagram: 'https://instagram.com/_igotcrushonyou'
 
 category: '초록'
 tag: '초록'

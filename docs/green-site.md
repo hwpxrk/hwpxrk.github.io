@@ -6,20 +6,21 @@
 
 - `index.html`: 초록 홈페이지.
 - `_layouts/green.html`: 초록 페이지의 공통 문서·헤더·푸터.
-- `_layouts/green-article.html`: 소개, 후보자, 출마의 변, 공약, 필진의 공통 본문 레이아웃.
+- `_layouts/green-article.html`: 소개, 후보자, 출마의 변, 공약, 필진, 후보자 한마디의 공통 본문 레이아웃.
 - `_data/green.yml`: 표시 개수 설정만 관리합니다. `popular_limit: 6`은 홈페이지 이야기 가이드의 최대 개수, `related_limit: 3`은 본문 아래 관련 글의 최대 개수입니다.
 - `_pages/green-*.md`: 실제 Markdown 본문과 공통 콘텐츠 정보의 원본입니다. 제목·설명·게시일·작성자·분류·주소와 홈페이지 표시 여부를 각 파일의 front matter에서 관리합니다.
-- `_includes/green/content-data.html`: `green_key`가 있는 페이지를 모아 `green_order`로 정렬하고, 홈페이지 글·대표 글·필진 목록을 구성합니다.
+- `_includes/green/content-data.html`: `green_key`가 있는 페이지를 모아 `green_order`로 정렬하고 홈페이지 글·대표 글 목록을 구성합니다. 필진 목록 `green_writers`는 필진 페이지의 `writers` 배열을 사용합니다.
 - `_includes/green/hero.html`: 대표 게시글, 카드 썸네일, 본문 표지에 공통으로 사용하는 로고·포스터 문구·배경. 전달받은 페이지의 `green_artwork`, `green_key`, `green_cover_lines`를 사용하며, 표시 크기는 CSS에서 조절합니다.
 - `_includes/green/card.html`: 홈페이지 콘텐츠 카드. 같은 페이지의 제목·설명·분류와 이미지 위 날짜·작성자를 표시합니다.
+- `_includes/green/person-list.html`: 홈페이지 필진 목록. `green_writers`의 직책·이름·전공을 3열로 표시하고 각 행을 Instagram에 연결합니다.
 - `assets/css/green.scss`: 데스크톱·태블릿·모바일 공통 스타일 원본. Jekyll 빌드 결과와 페이지에서 불러오는 경로는 기존 `assets/css/green.css`를 유지합니다.
 - `assets/js/green/main.js`: 검색, 대화상자, 슬라이드, 콘텐츠 레일, 상단 이동.
 - `assets/src/green/`: 기존 초록 로고와 favicon.
 - `_data/navigation.yml`: 사용자가 작성한 다섯 개 메뉴의 짧은 이름과 주소. 게시글 제목과 별도로 관리합니다.
 
-기존 Minimal Mistakes 레이아웃과 Asterisk 자산은 다른 기존 페이지를 위해 유지합니다. 초록 페이지의 `green_key`는 페이지마다 고유하게 지정하는 식별자입니다. `green_order`는 초록 소개, 후보자, 출마의 변, 공약, 필진에 1부터 5까지, 후보자 한마디 세 페이지에 6부터 8까지 지정되어 있습니다. 대표 슬라이드는 별도의 `green_hero_order`에 따라 초록 소개, 출마의 변, 후보자, 공약 순서로 표시되며 개수 표시도 목록 길이를 따릅니다.
+기존 Minimal Mistakes 레이아웃과 Asterisk 자산은 다른 기존 페이지를 위해 유지합니다. 초록 페이지의 `green_key`는 페이지마다 고유하게 지정하는 식별자입니다. `green_order`는 초록 소개, 후보자, 출마의 변, 공약, 필진에 1부터 5까지, 후보자 한마디 세 페이지에 6부터 8까지 지정되어 있습니다. 대표 슬라이드는 별도의 `green_hero_order`에 따라 초록 소개, 출마의 변, 후보자, 공약 순서로 표시되며 개수 표시도 목록 길이를 따릅니다. 출마의 변은 단일 카드로 공동 원고에 연결하고, 후보자 소개 대표 카드는 소개 표지 뒤에 세 후보의 한마디 카드를 겹쳐 표시합니다.
 
-게시글 정보는 Markdown 파일 한 곳에서 수정합니다. `_data/green.yml`에 제목·설명·링크나 후보자 정보를 다시 작성하지 않습니다. `_config.yml`의 `author.links`와 `footer.links`는 다른 기존 레이아웃을 위해 남겨 두며, 초록 레이아웃의 후보자 SNS는 아래에서 설명하는 `writer` 정보를 사용합니다.
+게시글 정보는 Markdown 파일 한 곳에서 수정합니다. `_data/green.yml`에 제목·설명·링크나 후보자 정보를 다시 작성하지 않습니다. `_config.yml`의 `author.links`와 `footer.links`는 다른 기존 레이아웃을 위해 남겨 두며, 초록 레이아웃의 후보자 SNS는 `_pages/green-writers.md`의 `writers` 정보를 사용합니다.
 
 ## 글자 크기와 레이아웃 단위
 
@@ -45,16 +46,17 @@
 
 | front matter 항목 | 용도 |
 | --- | --- |
-| `title` | 본문 제목, 홈페이지 카드·가이드·대표 글 제목, 관련 글, 검색 제목에 공통으로 사용합니다. |
+| `title` | 본문 제목, 홈페이지 카드·가이드·대표 글 제목, 관련 글, 검색 제목에 공통으로 사용합니다. 겹친 한마디 카드의 노출 라벨도 이 값을 사용합니다. |
 | `description` | 본문 머리말, 카드·가이드·대표 글 설명, 관련 글과 검색 설명에 공통으로 사용합니다. |
 | `date` | 홈페이지 카드 이미지 위에 표시할 게시일입니다. 없으면 `게시일 준비 중`으로 표시합니다. |
 | `author` | 홈페이지 카드 이미지 위에 표시할 작성자입니다. 없으면 사이트의 기본 작성자 이름을 사용합니다. |
 | `category` | 카드의 분류 태그, 관련 글의 분류, 검색 결과에 사용합니다. 현재 주요 다섯 페이지는 모두 `초록`입니다. |
 | `permalink` | 페이지 주소와 해당 글을 가리키는 카드·대표 글·관련 글·검색 링크의 기준입니다. |
 | `green_key` | 초록 콘텐츠로 모을 페이지의 고유 식별자이며, `green_artwork`가 없을 때 표지 배경 종류로도 사용합니다. |
-| `green_order` | 페이지 목록의 표시 순서입니다. 홈페이지 목록·가이드·관련 글과 필진 목록은 이 순서를 따릅니다. |
+| `green_order` | 페이지 목록의 표시 순서입니다. 홈페이지 목록·가이드·관련 글과 겹친 한마디 카드는 이 순서를 따릅니다. 필진 순서는 `writers` 배열에서 관리합니다. |
 | `green_home` | `true`이면 홈페이지 목록·가이드와 관련 글 후보에 포함합니다. 생략해도 `green_key`가 있으면 검색에는 포함합니다. |
 | `green_hero_order` | 이 항목이 있는 페이지를 홈페이지 대표 글에 포함하고, 지정한 숫자로 정렬합니다. 대표 글에서 제외하려면 항목을 생략합니다. |
+| `green_parent` | 홈페이지의 어느 대표 카드 뒤에 묶을지 지정합니다. 값이 대표 글의 `green_key`와 같으면 그 표지 뒤에 연결 카드로 표시합니다. 후보자 한마디 세 페이지는 `introduction`을 사용합니다. |
 | `green_kicker` | 대표 글과 본문 제목 위에 공통으로 표시할 소제목입니다. 영문 문구를 주로 사용하며 한글도 가능합니다. |
 | `green_cover_lines` | 표지 이미지 안의 포스터 문구를 줄별로 지정합니다. 바깥의 게시글 `title`과 구분합니다. |
 | `green_artwork` | 표지 배경 종류를 지정합니다. 다른 페이지의 `green_key`를 지정하면 그 페이지의 표지 문구 기본값도 재사용할 수 있습니다. |
@@ -85,34 +87,61 @@ tag: '초록'
 ---
 ```
 
-표지 문구는 해당 페이지의 `green_cover_lines`, `green_artwork`가 가리키는 페이지의 `green_cover_lines`, 해당 페이지의 `title` 순서로 선택합니다. 예를 들어 한마디 페이지의 `green_artwork: statement`는 출마의 변 배경과 기본 표지 문구를 재사용합니다. 그 페이지에 `green_cover_lines`를 직접 추가하면 배경은 유지하면서 포스터 문구만 바꿀 수 있습니다. 표지 문구 기본값이 없으면 게시글 제목을 표시합니다.
+표지 문구는 해당 페이지의 `green_cover_lines`, `green_artwork`가 가리키는 페이지의 `green_cover_lines`, 해당 페이지의 `title` 순서로 선택합니다. 후보자 한마디 페이지의 `green_artwork: introduction`은 후보자 소개 배경과 기본 표지 문구를 재사용합니다. 그 페이지에 `green_cover_lines`를 직접 추가하면 배경은 유지하면서 포스터 문구만 바꿀 수 있습니다. 표지 문구 기본값이 없으면 게시글 제목을 표시합니다.
 
 메뉴에서 보이는 `초록`, `후보자` 같은 짧은 이름은 `_data/navigation.yml`에 남겨 둡니다. 게시글 제목을 바꾸어도 메뉴 이름은 유지됩니다. 페이지 주소를 바꿀 때는 메뉴 항목이나 Markdown 본문에 직접 작성한 링크도 함께 확인합니다.
 
-### 후보자 한마디와 필진 정보
+### 후보자 소개 카드와 한마디
 
-출마의 변 대표 이미지에는 네 개의 독립된 링크 카드가 겹쳐 있습니다. 맨 앞 표지는 `/statement/`로 연결되고, 뒤쪽 세 카드는 `writer`가 있는 한마디 페이지의 `green_order` 순서로 각 페이지의 주소에 연결됩니다. 현재 순서는 박현욱 6, 송선빈 7, 조연정 8입니다. 각 카드 하단에 후보자 이름이 보이는 `3rem` 영역(기본 글자 크기 16px에서 48px)을 두어 마우스와 터치로 선택할 수 있습니다. 링크에 키보드 포커스가 들어오면 기존 캐러셀의 자동 재생 일시 중지가 적용됩니다.
+홈페이지의 후보자 소개 대표 영역에는 네 개의 형제 링크 카드가 겹쳐 있습니다. 앞 표지는 `/introduction/`으로 연결되고, 뒤쪽 카드는 다음 순서로 연결됩니다.
 
-| 후보자의 한마디 | 편집 파일 | 주소 |
-| --- | --- | --- |
-| 정후보 박현욱 | `_pages/green-message-park-hyunwook.md` | `/voices/park-hyunwook/` |
-| 부후보 송선빈 | `_pages/green-message-song-seonbin.md` | `/voices/song-seonbin/` |
-| 부후보 조연정 | `_pages/green-message-jo-yeonjeong.md` | `/voices/jo-yeonjeong/` |
+| 제목·카드 라벨 | 편집 파일 | 주소 | `green_key` | `green_order` |
+| --- | --- | --- | --- | --- |
+| 정후보 박현욱의 한마디 | `_pages/green-words-hwpxrk.md` | `/words/hwpxrk/` | `hwpxrk` | 6 |
+| 부후보 송선빈의 한마디 | `_pages/green-words-sunbin1391.md` | `/words/sunbin1391/` | `sunbin1391` | 7 |
+| 부후보 조연정의 한마디 | `_pages/green-words-yyjj33.md` | `/words/yyjj33/` | `yyjj33` | 8 |
 
-각 한마디 페이지의 front matter에 후보자 정보도 함께 작성합니다. 박현욱 페이지의 예시는 다음과 같습니다.
+각 한마디 페이지에서 `title`을 바꾸면 노출 카드 라벨·본문 제목·검색 제목이 함께 바뀝니다. 링크 주소는 `permalink`를 사용합니다. 박현욱 페이지의 연결 설정은 다음과 같습니다.
 
 ```yaml
-writer:
-    name: '박현욱'
-    role: '정후보'
-    major: '산업인공지능전공'
-    message: '한마디 준비 중'
-    instagram: 'https://instagram.com/hwpxrk_'
+title: '정후보 박현욱의 한마디'
+layout: green-article
+permalink: '/words/hwpxrk/'
+green_key: hwpxrk
+green_order: 6
+green_parent: introduction
+green_artwork: introduction
 ```
 
-이 객체는 홈페이지 필진 목록의 이름·직책·전공·한마디·Instagram 주소, 출마의 변 뒤쪽 카드의 이름·직책, 후보자 소개 본문 아래 SNS 링크, 푸터 SNS 링크에 공통으로 사용합니다. 홈페이지 필진 행은 Instagram으로, 출마의 변 뒤쪽 카드는 해당 후보자의 한마디 페이지로 연결됩니다. `writer.message`는 목록에 표시하는 짧은 한마디이며 페이지의 `description`이나 Markdown 본문과는 별개입니다. 이름과 SNS 주소는 해당 후보자의 한마디 파일에서 수정합니다.
+`index.html`은 각 대표 글의 `green_key`와 `green_parent`가 일치하는 페이지를 `green_pages`에서 찾아 뒤쪽 카드로 표시합니다. `green_parent`는 묶일 대표 카드를, `green_artwork`는 표지 배경을 정하는 별도 설정입니다. 뒤쪽 세 카드는 각각 `3rem` 높이의 노출 띠에서 제목을 읽고 선택할 수 있으며, 네 링크는 중첩하지 않습니다. 키보드로 포커스하면 해당 링크의 outline이 표시됩니다.
 
-세 한마디 페이지는 `editorial_status: placeholder`이며 후보자의 실제 발언이 아닌 화면 확인용 창작 문구를 담습니다. 확정 원고를 넣을 때 제목·설명·본문과 임시 글 안내를 함께 갱신하고, 필요한 경우 `writer.message`도 수정합니다. 실제 확인된 이름과 링크를 사용합니다.
+한마디 세 페이지에는 `green_home`과 `green_hero_order`를 지정하지 않습니다. 따라서 독립된 대표 슬라이드나 홈페이지 콘텐츠 카드로 추가되지 않으며, 대표 글 4개·홈페이지 카드 5개를 유지하고 검색 대상에는 세 한마디를 더해 총 8개 페이지를 포함합니다. 본문은 확정 원고를 넣기 전까지 준비 중 안내를 표시합니다.
+
+후보자 소개 원본 Markdown의 사진·연혁·직접 작성한 소감은 소개 페이지에서 관리합니다. 그 본문 하단에 별도 후보자 명단을 추가하지 않습니다. 필진과 SNS 정보는 아래의 `writers` 배열에서 계속 관리하며, 한마디 페이지에 중복 작성하지 않습니다.
+
+### 필진 정보
+
+필진의 이름·직책·전공·Instagram 주소는 `_pages/green-writers.md`의 front matter에 있는 `writers` 배열에서 관리합니다. 배열에 적힌 순서가 홈페이지 목록과 푸터 SNS 링크의 순서입니다.
+
+```yaml
+writers:
+    - name: '박현욱'
+      role: '정후보'
+      major: '산업인공지능전공'
+      instagram: 'https://instagram.com/hwpxrk_'
+    - name: '송선빈'
+      role: '부후보'
+      major: '산업인공지능전공'
+      instagram: 'https://instagram.com/s_s_kong_03'
+    - name: '조연정'
+      role: '부후보'
+      major: 'AI융합운영전공'
+      instagram: 'https://instagram.com/_igotcrushonyou'
+```
+
+`_includes/green/content-data.html`이 이 배열을 `green_writers`로 전달하고, 홈페이지의 `_includes/green/person-list.html`과 푸터가 같은 정보를 사용합니다. 홈페이지 필진 행은 PC와 모바일 모두 직책·이름·전공 3열이며 Instagram으로 연결됩니다. 이름과 SNS 주소를 바꿀 때는 이 배열만 수정하고 실제 확인된 정보를 입력합니다.
+
+출마의 변은 `_pages/green-statement.md`에서 공동 원고 하나로 관리합니다. 후보자 소개 페이지는 기존 소개 본문을 표시하며 하단에 별도 필진 목록을 덧붙이지 않습니다.
 
 ### 새 글 추가
 
@@ -152,7 +181,7 @@ JEKYLL_ENV=production bundle exec jekyll build --destination /tmp/chorok-preview
 bundle exec jekyll serve --host 127.0.0.1 --port 4000
 ```
 
-브라우저에서 `http://127.0.0.1:4000/`을 열어 홈페이지와 위 다섯 주소를 확인합니다. 하위 경로에 게시할 때는 `baseurl`을 지정한 빌드에서도 이미지·메뉴·검색 결과 링크가 해당 경로를 포함하는지 확인합니다. 기본 주소의 빌드 성공만으로 실제 브라우저 동작이나 배포 성공을 의미하지는 않습니다.
+브라우저에서 `http://127.0.0.1:4000/`을 열어 홈페이지와 위 다섯 기본 페이지, 세 한마디 페이지의 주소를 확인합니다. 하위 경로에 게시할 때는 `baseurl`을 지정한 빌드에서도 이미지·메뉴·검색 결과 링크가 해당 경로를 포함하는지 확인합니다. 기본 주소의 빌드 성공만으로 실제 브라우저 동작이나 배포 성공을 의미하지는 않습니다.
 
 게시 전에는 콘텐츠 초안의 원고 확인, 모바일 메뉴·검색·슬라이드·키보드 조작, 외부 링크, 좁은 화면의 줄바꿈을 확인합니다. 이 작업 안내 자체는 GitHub push나 Sites 배포를 수행하지 않습니다.
 
@@ -190,7 +219,9 @@ bundle exec jekyll serve --host 127.0.0.1 --port 4000
 
 모바일 화면 검증은 데스크톱 Safari의 고정 너비 iframe 기준이며 실제 모바일 기기를 사용하지 않았습니다. 기존 외부 Instagram 주소는 유지했으며 외부 사이트의 현재 응답 여부는 이번 본문 작업에서 재검증하지 않았습니다. 원고의 사실관계는 제공된 자료끼리 대조한 범위입니다.
 
-## 출마의 변 카드 연결 검증
+## 이전 겹친 카드 구조의 검증 기록
+
+다음은 출마의 변 표지 뒤에 개별 후보자 글을 연결했던 이전 구조의 기록입니다. 아래 페이지 수·링크 수·동작 결과는 현재 후보자 소개 표지에 연결한 한마디 카드의 검증 결과가 아닙니다.
 
 - 기본 주소 및 `/council` 하위 경로의 production 빌드: 통과.
 - 각 빌드의 홈페이지·본문 8개 페이지와 내부 참조 476개: 누락·하위 경로 이탈 없음.
@@ -203,12 +234,14 @@ bundle exec jekyll serve --host 127.0.0.1 --port 4000
 
 ## 5초 간격과 좌우 전환 검증
 
+출마의 변 표지에 개별 후보자 글과 겹친 카드를 사용하던 시점의 검증 기록입니다. 현재 후보자 소개 카드 연결 작업의 검증과 구분합니다.
+
 - 초록 소개가 첫 번째인 네 개의 대표 글 순서와 Jekyll production 빌드: 통과.
 - 전체 JavaScript를 실행하는 모의 DOM·가상 시계 검증 15개: 통과. 0·4.999·5·10·15·20초에 1·1·2·3·4·1번 슬라이드를 확인했습니다.
 - 다음·이전·양끝 순환·페이지 선택의 이동 방향과 500ms 설정, 연속 선택 시 이전 효과 취소, 동작 줄이기 설정, 비활성 슬라이드의 `inert`·`aria-hidden`, 포커스 이동을 확인했습니다.
 - 기존 일시정지·재생, 문서 숨김, 대화상자와 스와이프 검증: 통과.
 - JavaScript 구문, CSS 파싱, `git diff --check`: 통과.
-- Safari에서 초록 소개 첫 화면과 수동 선택 상태, 320px·390px 배치를 확인했습니다. 320px에서 같은 선택 버튼을 다시 눌러 진행 중 효과를 취소했을 때 출마의 변 네 카드와 조작부가 정상적으로 표시되는 것을 확인했습니다.
+- Safari에서 초록 소개 첫 화면과 수동 선택 상태, 320px·390px 배치를 확인했습니다. 320px에서 같은 선택 버튼을 다시 눌러 진행 중 효과를 취소했을 때 당시 사용하던 출마의 변 네 카드와 조작부가 정상적으로 표시되는 것을 확인했습니다.
 
 Safari 제어 환경에서는 애니메이션이 시작 위치에서 진행되지 않는 현상이 관찰되었습니다. 실제 5초 간격과 0.5초 이동의 연속 재생은 확인하지 못했으므로, 모의 환경에서의 시간·방향 검증과 실제 화면 배치 검증을 구분합니다.
 

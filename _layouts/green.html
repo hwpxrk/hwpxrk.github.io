@@ -42,7 +42,7 @@
             <div class="green-footer-top">
                 <nav aria-label="후보자 인스타그램">
                     {% for candidate in green_writers %}
-                    <a href="{{ candidate.writer.instagram | escape }}" target="_blank" rel="noopener noreferrer">{% if candidate.writer.role == '부후보' %}{{ candidate.writer.major | escape }} {% endif %}{{ candidate.writer.role | escape }} INSTAGRAM<span class="green-sr-only"> (새 창)</span></a>
+                    <a href="{{ candidate.instagram | escape }}" target="_blank" rel="noopener noreferrer">{% if candidate.role == '부후보' %}{{ candidate.major | escape }} {% endif %}{{ candidate.role | escape }} INSTAGRAM<span class="green-sr-only"> (새 창)</span></a>
                     {% endfor %}
                 </nav>
                 <nav aria-label="하단 메뉴">

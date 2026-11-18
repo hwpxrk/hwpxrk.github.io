@@ -2,7 +2,7 @@
 title: '우리가 초록에 함께해야 하는 이유'
 description: '초록이 함께 써내려 갈 스무 가지의 약속을 소개합니다.'
 
-date: '2026-11-18'
+date: 2026-11-19
 author: '초록'
 
 layout: green-article

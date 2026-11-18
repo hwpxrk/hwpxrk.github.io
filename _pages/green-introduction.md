@@ -2,7 +2,7 @@
 title: '후보자 소개'
 description: '초록을 이끌어 갈 후보자를 소개합니다.'
 
-date: '2026-11-18'
+date: 2026-11-19
 author: '초록'
 
 layout: green-article
@@ -21,17 +21,13 @@ category: '초록'
 tag: '초록'
 ---
 
-응용AI융합학부 학우 여러분, 안녕하십니까.
-
-제4대 응용AI융합학부 학생회장단 선거운동본부 ‘초록’의 정후보 산업인공지능전공 박현욱, 부후보 산업인공지능전공 송선빈, AI융합운영전공 조연정입니다.
-
-각자의 일터와 학생회에서 쌓아 온 경험에 책임감을 더해, 응용AI융합학부의 변화를 이끌어 보고자 합니다.
+여러분께 제4대 응용AI융합학부 학생회장단 선거운동본부 초록을 이끌어 갈 후보자를 소개합니다!
 
 <section class="green-profile" aria-labelledby="정후보-박현욱">
     <img class="green-profile-portrait" src="{{ '/assets/src/green/candidates/park_hyunwook.jpeg' | relative_url }}" width="413" height="531" alt="박현욱 후보 증명사진" loading="lazy" decoding="async">
     <header class="green-profile-header">
         <h2 id="정후보-박현욱" class="green-profile-heading"><span class="green-profile-role">정후보</span> <span class="green-profile-name">박현욱</span></h2>
-        <p class="green-profile-major">성균관대학교 응용AI융합학부<br>산업인공지능전공 · 24학번</p>
+        <p class="green-profile-major">성균관대학교 응용AI융합학부<br>산업인공지능전공 | 24학번</p>
     </header>
     <dl class="green-timeline">
         <dt>2002</dt>
@@ -90,13 +86,27 @@ tag: '초록'
     </dl>
 </section>
 
+<p style="text-align: center; margin-bottom: 10rem;">
+    안녕하세요, 초록의 정후보 박현욱입니다.<br>
+    저의 차별점은 <strong>풍부한 경험</strong>이라고 생각합니다.<br>
+    직장 내 TF팀 전환 경험, 기획국원, 부학생회장, 높은 성적 등 다양한 경험을 보유하고 있습니다.<br>
+    완전한 학부로서의 도전과 도약, 그리고 이를 향한 학우 여러분 믿음.<br>
+    그 중심에서 우리만의 초록을 정의하는 데 누구보다 앞장서겠습니다.<br>
+</p>
+
 <section class="green-profile" aria-labelledby="부후보-송선빈">
     <img class="green-profile-portrait" src="{{ '/assets/src/green/candidates/song_seonbin.jpeg' | relative_url }}" width="1740" height="2460" alt="송선빈 후보 증명사진" loading="lazy" decoding="async">
     <header class="green-profile-header">
         <h2 id="부후보-송선빈" class="green-profile-heading"><span class="green-profile-role">부후보</span> <span class="green-profile-name">송선빈</span></h2>
-        <p class="green-profile-major">성균관대학교 응용AI융합학부<br>산업인공지능전공 · 25학번</p>
+        <p class="green-profile-major">성균관대학교 응용AI융합학부<br>산업인공지능전공 | 25학번</p>
     </header>
     <dl class="green-timeline">
+        <dt>2003</dt>
+        <dd>
+            <ul role="list">
+                <li>창원특례시 출생</li>
+            </ul>
+        </dd>
         <dt>2022</dt>
         <dd>
             <ul role="list">
@@ -114,13 +124,26 @@ tag: '초록'
     </dl>
 </section>
 
+<p style="text-align: center; margin-bottom: 10rem;">
+    안녕하세요, 초록의 부후보 송선빈입니다.<br>
+    초록이 약속하는 학생회는 단순합니다. 투명하고, 빠릿하게.<br>
+    숨기지 않고, 미루지 않겠습니다.<br>
+    말보다 행동으로 보여드리겠습니다.<br>
+</p>
+
 <section class="green-profile" aria-labelledby="부후보-조연정">
     <img class="green-profile-portrait" src="{{ '/assets/src/green/candidates/jo_yeonjeong.jpeg' | relative_url }}" width="354" height="472" alt="조연정 후보 증명사진" loading="lazy" decoding="async">
     <header class="green-profile-header">
         <h2 id="부후보-조연정" class="green-profile-heading"><span class="green-profile-role">부후보</span> <span class="green-profile-name">조연정</span></h2>
-        <p class="green-profile-major">성균관대학교 응용AI융합학부<br>AI융합운영전공 · 25학번</p>
+        <p class="green-profile-major">성균관대학교 응용AI융합학부<br>AI융합운영전공 | 25학번</p>
     </header>
     <dl class="green-timeline">
+        <dt>2002</dt>
+        <dd>
+            <ul role="list">
+                <li>서울특별시 출생</li>
+            </ul>
+        </dd>
         <dt>2021</dt>
         <dd>
             <ul role="list">
@@ -150,6 +173,12 @@ tag: '초록'
     </dl>
 </section>
 
-우리의 모든 계절이 초록으로 기억되기를 바라며,
+<p style="text-align: center; margin-bottom: 10rem;">
+    안녕하세요, 초록의 부후보 조연정입니다.<br>
+    초록은 기대하던 것 그 이상을 해냅니다.<br>
+</p>
 
-<a href="{{ '/statement/' | relative_url }}">초록의 출마의 변 읽기</a> · <a href="{{ '/dreams/' | relative_url }}">초록의 공약 살펴보기</a>
+초록에 대해 더 알아보세요!
+
+<a href="{{ '/statement/' | relative_url }}">초록의 출마의 변 읽기</a><br>
+<a href="{{ '/dreams/' | relative_url }}">초록의 핵심 공약 살펴보기</a>

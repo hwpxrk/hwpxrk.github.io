@@ -31,18 +31,8 @@ layout: green
             {{ content }}
         {% endif %}
 
-        {% if page.green_key == 'introduction' %}
-            <section class="green-candidates" aria-labelledby="green-candidates-title">
-                <h2 id="green-candidates-title">초록의 후보자들을 만나보세요.</h2>
-                {% for candidate in green_writers %}
-                    <a class="green-candidate" href="{{ candidate.writer.instagram | escape }}" target="_blank" rel="noopener noreferrer">
-                        <span>{% if candidate.writer.role == '부후보' %}{{ candidate.writer.major | escape }} {% endif %}{{ candidate.writer.role | escape }}</span>
-                        <span>Instagram <span aria-hidden="true">↗</span><span class="green-sr-only"> (새 창)</span></span>
-                    </a>
-                {% endfor %}
-            </section>
-        {% endif %}
     </div>
+
 </article>
 
 <section class="green-related" aria-labelledby="green-related-title">

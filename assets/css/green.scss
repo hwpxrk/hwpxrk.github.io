@@ -518,18 +518,6 @@ h3 {
     font-size: theme.$font-size-4;
 }
 
-.green-stack-role {
-    margin-right: 0.5rem;
-
-    font-size: theme.$font-size-3;
-}
-
-.green-stack-note {
-    margin-left: 0.25rem;
-
-    font-size: theme.$font-size-3;
-}
-
 .green-stack-caption > .green-icon {
     flex-shrink: 0;
     width: 1.25rem;
@@ -1217,7 +1205,7 @@ html.green-js .green-card-track {
 
 .green-person {
     display: grid;
-    grid-template-columns: 5rem 7rem minmax(10rem, 1fr) minmax(0, 1.8fr);
+    grid-template-columns: 5rem 7rem minmax(0, 1fr);
     align-items: center;
     gap: 1.5rem;
     min-height: 3.5rem;
@@ -1252,18 +1240,6 @@ html.green-js .green-card-track {
 
 .green-person h3 {
     font-size: theme.$font-size-5;
-}
-
-.green-person-message {
-    color: theme.$gray;
-}
-
-.green-person:nth-child(3n + 1):is(:hover, :focus-visible) .green-person-message {
-    color: inherit;
-}
-
-.green-person:nth-child(3n + 2):is(:hover, :focus-visible) .green-person-message {
-    color: theme.$white;
 }
 
 .green-more-link {
@@ -1644,7 +1620,7 @@ html.green-js .green-card-track {
     border-left: 4px solid var(--green);
 }
 
-.green-article-body a:not(.green-candidate) {
+.green-article-body a {
     text-decoration: underline;
 
     text-underline-offset: 0.25rem;
@@ -1667,10 +1643,6 @@ html.green-js .green-card-track {
 .green-draft > p:last-child {
     font-size: theme.$font-size-4;
     color: var(--muted);
-}
-
-.green-candidates {
-    margin-top: 3.75rem;
 }
 
 .green-profile {
@@ -1707,8 +1679,8 @@ html.green-js .green-card-track {
 }
 
 .green-profile-role {
-    font-size: theme.$font-size-5;
-    font-weight: 650;
+    font-size: theme.$font-size-6;
+    font-weight: bold;
     letter-spacing: 0;
 }
 
@@ -1720,7 +1692,8 @@ html.green-js .green-card-track {
     margin-top: 1.25rem;
 
     font-size: theme.$font-size-4;
-    color: var(--muted);
+    font-weight: light;
+    color: theme.$gray;
 }
 
 .green-profile > .green-timeline {
@@ -1761,25 +1734,6 @@ html.green-js .green-card-track {
 
 .green-timeline li + li {
     margin-top: 0.5rem;
-}
-
-.green-candidates h2 {
-    font-size: theme.$font-size-7;
-}
-
-.green-candidate {
-    display: flex;
-    justify-content: space-between;
-    gap: 1.25rem;
-    padding-block: 1.5rem;
-
-    font-size: theme.$font-size-4;
-
-    border-bottom: 1px solid #ccc;
-}
-
-.green-candidate:hover {
-    color: var(--green);
 }
 
 .green-related {
@@ -2189,16 +2143,6 @@ html.green-js .green-card-track {
         font-size: theme.$font-size-3;
     }
 
-    .green-stack-role {
-        margin-right: 0.25rem;
-
-        font-size: theme.$font-size-2;
-    }
-
-    .green-stack-note {
-        font-size: theme.$font-size-2;
-    }
-
     .green-hero-arrow {
         display: none;
     }
@@ -2355,10 +2299,6 @@ html.green-js .green-card-track {
         font-size: theme.$font-size-4;
     }
 
-    .green-person-message {
-        display: none;
-    }
-
     .green-more-link {
         margin-top: 2.25rem;
     }
@@ -2508,10 +2448,6 @@ html.green-js .green-card-track {
         font-size: theme.$font-size-3;
     }
 
-    .green-candidate {
-        font-size: theme.$font-size-3;
-    }
-
     .green-timeline {
         grid-template-columns: 4.75rem minmax(0, 1fr);
     }
@@ -2523,12 +2459,6 @@ html.green-js .green-card-track {
 
     .green-timeline dd {
         padding-left: 1rem;
-    }
-
-    .green-candidate > span:last-child {
-        flex-shrink: 0;
-
-        font-size: theme.$font-size-2;
     }
 
     .green-related {
