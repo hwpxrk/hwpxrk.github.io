@@ -30,6 +30,3 @@ tag: '초록'
 보이지 않는 곳에서 해온 일을, 이제는 학우 여러분 앞에서 초록의 서사로 함께 써내려가고자 합니다.<br>
 
 감사합니다.<br>
-
-<a href="{{ '/statement/' | relative_url }}">초록 출마의 변 읽기</a><br>
-<a href="{{ '/introduction/' | relative_url }}">후보자 소개로 돌아가기</a>
