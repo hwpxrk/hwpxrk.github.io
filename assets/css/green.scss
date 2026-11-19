@@ -274,10 +274,19 @@ h3 {
     background: var(--paper);
 }
 
+.green-site:not(.green-home) .green-header,
 .green-header.is-scrolled {
     color: #fff;
 
     background: var(--ink);
+
+    .green-brand img {
+        filter: invert(1);
+    }
+
+    .green-brand-dot {
+        color: var(--lime);
+    }
 }
 
 .green-brand {
@@ -298,16 +307,8 @@ h3 {
     object-fit: contain;
 }
 
-.is-scrolled .green-brand img {
-    filter: invert(1);
-}
-
 .green-brand-dot {
     color: var(--green);
-}
-
-.is-scrolled .green-brand-dot {
-    color: var(--lime);
 }
 
 .green-desktop-nav {
