@@ -95,7 +95,7 @@ facebook:
     username:
     app_id:
     publisher:
-og_image: 'assets/src/green/logo/profile.png'
+og_image: 'assets/src/green/logo/opengraph.png'
 og_image_alt: '초록'
 # For specifying social profiles
 # - https://developers.google.com/structured-data/customize/social-profiles

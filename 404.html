@@ -1,0 +1,20 @@
+---
+layout: green
+permalink: /404.html
+title: 404 · 페이지를 찾을 수 없어요
+sitemap: false
+search: false
+robots: noindex
+---
+
+<section class="green-not-found" aria-labelledby="green-not-found-title">
+    <img class="green-not-found-code" src="{{ '/assets/src/green/logo/404.svg' | relative_url }}" width="3601" height="1668" alt="">
+    <h1 id="green-not-found-title"><span class="green-sr-only">404. </span>페이지를 찾을 수 없어요.</h1>
+    <p>주소를 잘못 입력했거나 페이지가 옮겨졌을 수 있어요.</p>
+    <div class="green-not-found-actions">
+        <a href="{{ '/' | relative_url }}">초록 홈으로</a>
+        <button type="button" data-search-open aria-haspopup="dialog" aria-controls="green-search">
+            {% include green/icon.html name='search' %} 게시글 검색
+        </button>
+    </div>
+</section>
