@@ -30,3 +30,9 @@ tag: '초록'
 보이지 않는 곳에서 해온 일을, 이제는 학우 여러분 앞에서 초록의 서사로 함께 써내려가고자 합니다.<br>
 
 감사합니다.<br>
+
+<p style="text-align: center;">
+    <a href="{{ '/abstract/' | relative_url }}">초록? 초록!: 여러분을 초록으로 초대합니다.</a><br><br>
+    <a href="{{ '/statement/' | relative_url }}">초록의 다짐: 모두가 초록에 진심 (출마의 변)</a><br><br>
+    <a href="{{ '/statement/' | relative_url }}">초록의 공약: 우리가 초록에 함께해야 하는 이유</a><br><br>
+</p>

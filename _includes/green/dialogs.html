@@ -15,7 +15,7 @@
         <p class="green-search-empty" data-search-empty hidden>검색 결과가 없습니다. 다른 키워드로 찾아보세요.</p>
     </div>
 </dialog>
-<dialog class="green-dialog green-menu-dialog" id="green-menu" aria-labelledby="green-menu-title">
+<dialog class="green-dialog green-menu-dialog" id="green-menu" aria-labelledby="green-menu-title" autofocus>
     <div class="green-dialog-header"><a class="green-dialog-brand" href="{{ '/' | relative_url }}">초록.</a><button class="green-icon-button" type="button" data-dialog-close aria-label="메뉴 닫기">{% include green/icon.html name='close' %}</button></div>
     <h2 id="green-menu-title" class="green-sr-only">전체 메뉴</h2>
     <nav class="green-menu-links" aria-label="전체 메뉴">{% for link in site.data.navigation.main %}<a href="{{ link.url | relative_url }}"><span>{{ link.title }}</span>{% include green/icon.html name='diagonal' %}</a>{% endfor %}</nav>

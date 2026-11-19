@@ -1577,6 +1577,10 @@ html.green-js .green-card-track {
     background: #dce6d5;
 }
 
+.green-menu-dialog:focus {
+    outline: none;
+}
+
 .green-menu-links {
     margin: 2.25rem 1.5rem;
 }

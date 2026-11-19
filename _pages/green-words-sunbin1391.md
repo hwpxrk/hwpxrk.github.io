@@ -36,3 +36,9 @@ tag: '초록'
 이제 우리 학부는 처음으로 네 학년이 모두 함께하는 완전한 학부가 됩니다. 그 첫 해에 학우 여러분이 "학생회가 빠르고, 믿을 만하다"고 말씀해 주실 수 있도록 끝까지 움직이겠습니다.<br>
 
 감사합니다.<br>
+
+<p style="text-align: center;">
+    <a href="{{ '/abstract/' | relative_url }}">초록? 초록!: 여러분을 초록으로 초대합니다.</a><br><br>
+    <a href="{{ '/statement/' | relative_url }}">초록의 다짐: 모두가 초록에 진심 (출마의 변)</a><br><br>
+    <a href="{{ '/statement/' | relative_url }}">초록의 공약: 우리가 초록에 함께해야 하는 이유</a><br><br>
+</p>
