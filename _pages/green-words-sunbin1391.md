@@ -9,7 +9,7 @@ layout: green-article
 permalink: '/words/sunbin1391/'
 green_key: sunbin1391
 green_order: 7
-green_parent: introduction
+green_parent: statement
 green_kicker: '초록의 한마디'
 green_artwork: introduction
 green_cover_lines:

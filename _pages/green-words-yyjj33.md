@@ -9,7 +9,7 @@ layout: green-article
 permalink: '/words/yyjj33/'
 green_key: yyjj33
 green_order: 8
-green_parent: introduction
+green_parent: statement
 green_kicker: '초록의 한마디'
 green_artwork: introduction
 green_cover_lines:
